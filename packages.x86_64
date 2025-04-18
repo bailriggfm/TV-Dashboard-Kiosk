@@ -1,0 +1,59 @@
+# Essentials for an image including VM support
+base
+bash-completion
+hyperv
+linux
+mkinitcpio
+mkinitcpio-archiso
+open-vm-tools
+#openssh
+pv
+qemu-guest-agent
+syslinux
+virtualbox-guest-utils-nox
+
+# Linux extras
+linux-headers
+linux-firmware
+
+# Drivers and extra support
+dkms
+v4l2loopback-dkms
+v4l2loopback-utils
+#nvidia-dkms
+#nvidia-utils
+mesa
+
+# Networking
+networkmanager
+firewalld
+
+# GUI environment
+cage
+wlr-randr
+xorg-xwayland
+
+# Audio Support
+pipewire
+wireplumber
+pipewire-alsa
+pipewire-pulse
+pipewire-jack
+pipewire-audio
+pipewire-ffado
+pipewire-roc
+pipewire-x11-bell
+pipewire-x11-bell
+pipewire-v4l2
+
+lib32-pipewire
+lib32-pipewire-jack
+lib32-pipewire-v4l2
+
+# Useful Tools
+htop
+fastfetch
+ffmpeg
+
+# Our caged Application
+firefox
