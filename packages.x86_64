@@ -27,6 +27,7 @@ mesa
 # Networking
 networkmanager
 firewalld
+ntp
 
 # GUI environment
 cage
