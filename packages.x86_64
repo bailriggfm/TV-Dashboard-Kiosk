@@ -54,7 +54,7 @@ lib32-pipewire-v4l2
 # Useful Tools
 htop
 fastfetch
-ffmpeg
+#ffmpeg
 
 # Our caged Application
 firefox
