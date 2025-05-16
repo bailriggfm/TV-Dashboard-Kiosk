@@ -5,6 +5,7 @@ hyperv
 linux
 mkinitcpio
 mkinitcpio-archiso
+sudo
 open-vm-tools
 #openssh
 pv
