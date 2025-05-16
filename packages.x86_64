@@ -24,6 +24,10 @@ v4l2loopback-utils
 #nvidia-utils
 mesa
 
+# Firmware booting extra options and tui
+dialog
+efibootmgr
+
 # Networking
 networkmanager
 firewalld

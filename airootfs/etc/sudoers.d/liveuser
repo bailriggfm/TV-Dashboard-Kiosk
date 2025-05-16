@@ -1,1 +1,3 @@
 %wheel ALL=(ALL:ALL) ALL
+
+%wheel ALL=(ALL) NOPASSWD: /etc/Next-Boot-OS.sh
