@@ -23,6 +23,33 @@ if [ -z "$BOOT_OPTIONS" ]; then
     exit 1
 fi
 
+# Look for Windows boot entries
+WINDOWS_ENTRY=""
+while IFS= read -r line; do
+    if echo "$line" | grep -i "windows\|microsoft" > /dev/null; then
+        WINDOWS_ENTRY="$line"
+        break
+    fi
+done <<< "$BOOT_OPTIONS"
+
+# If Windows entry found, ask for confirmation to boot into it
+if [ -n "$WINDOWS_ENTRY" ]; then
+    WINDOWS_ID=$(echo "$WINDOWS_ENTRY" | awk '{print $1}')
+    WINDOWS_NAME=$(echo "$WINDOWS_ENTRY" | cut -d' ' -f2-)
+
+    dialog --title "Windows Boot Option Found" \
+           --yesno "Windows boot option found:\n\n$WINDOWS_NAME\n\nDo you want to reboot into Windows?" 10 60
+
+    if [ $? -eq 0 ]; then
+        # User confirmed, boot into Windows
+        BOOT_NUM=${WINDOWS_ID:4}
+        clear
+        efibootmgr -n "$BOOT_NUM" && reboot
+        exit 0
+    fi
+    # If user declined, continue with default behavior
+fi
+
 # Prepare menu entries
 MENU_ENTRIES=()
 while IFS= read -r line; do
@@ -49,3 +76,4 @@ BOOT_NUM=${CHOICE:4}
 
 # Reboot into the selected option
 efibootmgr -n "$BOOT_NUM" && reboot
+exit 0
