@@ -49,3 +49,4 @@ BOOT_NUM=${CHOICE:4}
 
 # Reboot into the selected option
 efibootmgr -n "$BOOT_NUM" && reboot
+exit 0
