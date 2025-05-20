@@ -37,6 +37,11 @@ if [ -n "$WINDOWS_ENTRY" ]; then
     WINDOWS_ID=$(echo "$WINDOWS_ENTRY" | awk '{print $1}')
     WINDOWS_NAME=$(echo "$WINDOWS_ENTRY" | cut -d' ' -f2-)
 
+    # Limit WINDOWS_NAME to 50 characters
+    if [ ${#WINDOWS_NAME} -gt 50 ]; then
+        WINDOWS_NAME="${WINDOWS_NAME:0:47}..."
+    fi
+
     dialog --title "Windows Boot Option Found" \
            --yesno "Windows boot option found:\n\n$WINDOWS_NAME\n\nDo you want to reboot into Windows?" 10 60
 
