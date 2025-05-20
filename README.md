@@ -11,6 +11,8 @@ Then simply clone this repo, update the ISO1_EXEC in build.sh with either the we
 
 Finally call the build.sh script as root.
 
+After building you will need to remove the work directory `../work-iso1`. Before doing so it is best to check using findmnt that there are no folders mounted within. See: https://wiki.archlinux.org/title/Archiso#Removal_of_work_directory
+
 ### Important notes
 
 > [!IMPORTANT]
