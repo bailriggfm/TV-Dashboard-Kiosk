@@ -25,6 +25,9 @@ v4l2loopback-utils
 #nvidia-utils
 mesa
 
+# For a pretty boot screen
+plymouth
+
 # Firmware booting extra options and tui
 dialog
 efibootmgr
