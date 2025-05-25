@@ -30,3 +30,5 @@ Pressing CTRL + ALT + 3 (TTY3) will automatically log you into a tty as user liv
 The sudo password for the user is liveuser. If you need to keep the system secure please change the password in the build.sh script
 
 By default the localtime is set to Europe/London. This can be updated by updating the symlink for `airootfs/etc/localtime`
+
+Firefox is configured on all users with a custom default firefox profile. This profile enables autoplay of media, disables first-run behaviours, disables all telemetry and sets the theme to a dark theme. This is useful for the kiosk that may not have user interaction but have autoplay of media. For safety we also specify the profile when we start firefox.
