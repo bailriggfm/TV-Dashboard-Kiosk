@@ -37,21 +37,29 @@ StandardOutput=tty-fail
 StandardError=tty-fail
 
 # Security hardening - Because our script does not need many permissions at all but root is required.
-NoNewPrivileges=yes
-CapabilityBoundingSet=CAP_SYS_BOOT CAP_DAC_READ_SEARCH
-AmbientCapabilities=CAP_SYS_BOOT CAP_DAC_READ_SEARCH
+# Relax device access for TTY
+PrivateDevices=no
+
+# Keep tmp isolation
 PrivateTmp=yes
+
+# Protect system but allow /dev and /sys access needed by efibootmgr and dialog
 ProtectSystem=full
 ProtectHome=read-only
 ProtectKernelModules=yes
 ProtectKernelTunables=yes
-RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
-MemoryDenyWriteExecute=yes
-PrivateDevices=yes
-RestrictNamespaces=yes
+
+# Keep capability bounding but add CAP_SYS_ADMIN for some terminal/ioctl needs
+CapabilityBoundingSet=CAP_SYS_BOOT CAP_DAC_READ_SEARCH CAP_SYS_ADMIN
+AmbientCapabilities=CAP_SYS_BOOT CAP_DAC_READ_SEARCH CAP_SYS_ADMIN
+
+# Allow tty-related syscalls
 SystemCallFilter=~@clock @debug @keyring @module @mount @obsolete @proc @raw-io
+
+NoNewPrivileges=yes
 RestrictRealtime=yes
 RestrictSUIDSGID=yes
+RestrictNamespaces=no
 
 [Install]
 WantedBy=multi-user.target
