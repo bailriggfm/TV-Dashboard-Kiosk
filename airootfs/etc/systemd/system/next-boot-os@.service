@@ -36,6 +36,23 @@ StandardInput=tty-fail
 StandardOutput=tty-fail
 StandardError=tty-fail
 
+# Security hardening - Because our script does not need many permissions at all but root is required.
+NoNewPrivileges=yes
+CapabilityBoundingSet=CAP_SYS_BOOT CAP_DAC_READ_SEARCH
+AmbientCapabilities=CAP_SYS_BOOT CAP_DAC_READ_SEARCH
+PrivateTmp=yes
+ProtectSystem=full
+ProtectHome=read-only
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+MemoryDenyWriteExecute=yes
+PrivateDevices=yes
+RestrictNamespaces=yes
+SystemCallFilter=~@clock @debug @keyring @module @mount @obsolete @proc @raw-io
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+
 [Install]
 WantedBy=multi-user.target
 DefaultInstance=tty2
