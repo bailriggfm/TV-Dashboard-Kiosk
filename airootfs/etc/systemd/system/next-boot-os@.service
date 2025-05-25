@@ -1,0 +1,66 @@
+[Unit]
+Description=Run Next-Boot-OS Script on TTY %i
+# Make sure we are started after logins are permitted. If Plymouth is
+# used, we want to start when it is on its way out.
+After=systemd-user-sessions.service plymouth-quit-wait.service
+# Wait for network to be online
+Wants=network-online.target
+After=network-online.target
+# On systems without virtual consoles, do not start.
+ConditionPathExists=/dev/tty0
+# D-Bus is necessary for contacting logind, which is required.
+Wants=dbus.socket systemd-logind.service
+After=dbus.socket systemd-logind.service
+# Replace any (a)getty that may have spawned, since we log in
+# automatically.
+Conflicts=getty@%i.service
+After=getty@%i.service
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /opt/scripts/Next-Boot-OS.sh
+Restart=always
+RestartSec=1
+User=root
+# Log this user with utmp, letting it show up with commands 'w' and
+# 'who'. This is needed since we replace (a)getty.
+UtmpIdentifier=%i
+UtmpMode=user
+# A virtual terminal is needed.
+TTYPath=/dev/%I
+TTYReset=yes
+TTYVHangup=yes
+TTYVTDisallocate=yes
+# Fail to start if not controlling the virtual terminal.
+StandardInput=tty-fail
+StandardOutput=tty-fail
+StandardError=tty-fail
+
+# Security hardening - Because our script does not need many permissions at all but root is required.
+# Relax device access for TTY
+PrivateDevices=no
+
+# Keep tmp isolation
+PrivateTmp=yes
+
+# Protect system but allow /dev and /sys access needed by efibootmgr and dialog
+ProtectSystem=full
+ProtectHome=read-only
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+
+# Keep capability bounding but add CAP_SYS_ADMIN for some terminal/ioctl needs
+CapabilityBoundingSet=CAP_SYS_BOOT CAP_DAC_READ_SEARCH CAP_SYS_ADMIN
+AmbientCapabilities=CAP_SYS_BOOT CAP_DAC_READ_SEARCH CAP_SYS_ADMIN
+
+# Allow tty-related syscalls
+SystemCallFilter=~@clock @debug @keyring @module @mount @obsolete @proc @raw-io
+
+NoNewPrivileges=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+RestrictNamespaces=no
+
+[Install]
+WantedBy=multi-user.target
+DefaultInstance=tty2
