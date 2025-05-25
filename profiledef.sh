@@ -18,5 +18,5 @@ airootfs_image_tool_options=('-comp' 'xz' '-Xbcj' 'x86' '-b' '1M' '-Xdict-size' 
 file_permissions=(
   ["/etc/shadow"]="0:0:0400"
   ["/etc/gshadow"]="0:0:0400"
-  ["/etc/Next-Boot-OS.sh"]="0:0:0755"
+  ["/opt/scripts/Next-Boot-OS.sh"]="0:0:0755"
 )
