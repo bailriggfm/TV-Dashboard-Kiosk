@@ -9,7 +9,7 @@ fi
 
 # CONFIG
 ISO_LABEL="ArchLinux-Kiosk"
-ISO1_EXEC='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://google.com"'
+ISO1_EXEC='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --profile "/home/live/.mozilla/firefox/m1j0kl8f.kiosk_profile" --kiosk --no-remote --start-fullscreen --no-proxy-server "https://google.com"'
 USERPASSWORD="liveuser"
 
 # Do not change these unless you have changed the coressponding files.
