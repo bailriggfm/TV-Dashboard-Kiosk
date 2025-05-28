@@ -12,6 +12,31 @@ user_pref("media.autoplay.block-event.enabled", false);
 // Remove UI permission prompts
 user_pref("media.autoplay.enabled", true);
 
+// ===== Always start a private session by default =====
+// Always use private browsing mode
+user_pref("browser.privatebrowsing.autostart", true);
+
+// ===== Kiosk Like Behaviours =====
+// Set homepage or startup page
+user_pref("browser.startup.page", 1); // 1 = homepage
+user_pref("browser.startup.homepage", "about:blank");
+
+// Start in fullscreen (not guaranteed to work without --kiosk or --start-fullscreen)
+user_pref("browser.fullscreen.autohide", false);
+user_pref("browser.fullscreen.animateUp", 0);
+
+// Disable popup blocking
+user_pref("dom.disable_open_during_load", false);
+
+// Set kiosk-like restrictions
+user_pref("browser.tabs.warnOnClose", false);
+user_pref("browser.tabs.warnOnOpen", false);
+user_pref("toolkit.startup.max_resumed_crashes", -1);
+
+// Disable new windows/tabs (UI will be hidden anyway)
+user_pref("browser.link.open_newwindow", 1);
+user_pref("browser.link.open_newwindow.restriction", 0);
+
 // ===== Disable all First Run in Firefox =====
 
 // Disable "What's New" pages on startup or after update
@@ -79,8 +104,101 @@ user_pref("breakpad.reportURL", "");
 user_pref("browser.crashReports.unsubmittedCheck.enabled", false);
 user_pref("browser.crashReports.unsubmittedCheck.autoSubmit", false);
 
+// ===== UI Customisations =====
+// Disable address bar suggestions
+user_pref("browser.urlbar.suggest.history", false);
+user_pref("browser.urlbar.suggest.bookmark", false);
+user_pref("browser.urlbar.suggest.openpage", false);
+user_pref("browser.urlbar.suggest.topsites", false);
+
+// Disable add-on recommendations
+user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
+
+// Disable Pocket integration
+user_pref("extensions.pocket.enabled", false);
+
+// Disable context menu (right-click)
+user_pref("dom.event.contextmenu.enabled", false);
+
+// Prevent middle-click from opening new tabs
+user_pref("middlemouse.openNewWindow", false);
+
+// Hide the Find bar shortcut
+user_pref("accessibility.typeaheadfind", false);
+
+// Disable drag-and-drop of tabs
+user_pref("browser.tabs.allowTabDetach", false);
+
+// Disable search engine suggestions
+user_pref("browser.search.suggest.enabled", false);
+user_pref("browser.search.suggest.enabled.private", false);
+
 // ===== Set the theme to a dark theme =====
 
 user_pref("extensions.activeThemeID", "firefox-dark@mozilla.org");
 // Force websites to use dark theme (dark mode for web content)
 user_pref("ui.systemUsesDarkTheme", 1);
+
+// ===== Disallow Firefox saving any data =====
+
+// Disable saving history
+user_pref("places.history.enabled", false);
+
+// Disable saving form and search history
+user_pref("browser.formfill.enable", false);
+
+// Disable saving passwords
+user_pref("signon.management.page.enabled", false);
+user_pref("signon.rememberSignons", false);
+
+// Kiosk: Disable autofill
+user_pref("signon.autofillForms", false);
+
+// Disable saving credit card data
+user_pref("extensions.formautofill.creditCards.enabled", false);
+
+// Disable autofill addresses
+user_pref("extensions.formautofill.addresses.enabled", false);
+
+// ===== Clear all firefox data on exit =====
+// Clear all specified data on shutdown
+user_pref("privacy.sanitize.sanitizeOnShutdown", true);
+
+// Set what to clear on shutdown
+user_pref("privacy.clearOnShutdown.cache", true);
+user_pref("privacy.clearOnShutdown.cookies", true);
+user_pref("privacy.clearOnShutdown.downloads", true);
+user_pref("privacy.clearOnShutdown.formdata", true);
+user_pref("privacy.clearOnShutdown.history", true);
+user_pref("privacy.clearOnShutdown.sessions", true);
+user_pref("privacy.clearOnShutdown.siteSettings", true);
+user_pref("privacy.clearOnShutdown.offlineApps", true);
+
+// ===== Cookie rules =====
+// Block third-party cookies
+user_pref("network.cookie.cookieBehavior", 1); // 1 = block third-party
+
+// Clear cookies when Firefox is closed
+user_pref("network.cookie.lifetimePolicy", 2);
+
+// ===== Downloads restrictions =====
+// Disable downloads manager UI
+user_pref("browser.download.useDownloadDir", false);
+user_pref("browser.download.manager.showWhenStarting", false);
+user_pref("browser.download.manager.focusWhenStarting", false);
+
+// Automatically clear downloads
+user_pref("browser.download.panel.shown", false);
+user_pref("browser.download.manager.retention", 0);
+
+// ===== Disable cache =====
+// Disable cache
+user_pref("browser.cache.disk.enable", false);
+user_pref("browser.cache.memory.enable", true);
+
+// Disable DNS prefetching
+user_pref("network.dns.disablePrefetch", true);
+
+// Disable speculative connections
+user_pref("network.http.speculative-parallel-limit", 0);
+

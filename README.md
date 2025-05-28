@@ -31,4 +31,9 @@ The sudo password for the user is liveuser. If you need to keep the system secur
 
 By default the localtime is set to Europe/London. This can be updated by updating the symlink for `airootfs/etc/localtime`
 
+### Firefox restrictions
 Firefox is configured on all users with a custom default firefox profile. This profile enables autoplay of media, disables first-run behaviours, disables all telemetry and sets the theme to a dark theme. This is useful for the kiosk that may not have user interaction but have autoplay of media. For safety we also specify the profile when we start firefox.
+
+This firefox config also sets various settings to create a more secure kiosk environment like disabling passwords, multiple tabs, and various developer tools.
+
+The specifics of this can be edited/viewed in `airootfs/etc/firefox/policies/policies.json` and `airootfs/etc/skel/.mozilla/firefox/m1j0kl8f.kiosk_profile/user.js`. These settings are applied to all users by default.
