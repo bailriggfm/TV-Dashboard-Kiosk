@@ -9,6 +9,8 @@ fi
 
 # CONFIG
 ISO_LABEL="ArchLinux-Kiosk"
+# Please note that some characters may need to be escaped to work with sed.
+# Such as &. If you want an & you must put \&
 ISO1_EXEC='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --profile "/home/live/.mozilla/firefox/m1j0kl8f.kiosk_profile" --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/office?pass=primary"'
 ISO2_EXEC='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --profile "/home/live/.mozilla/firefox/m1j0kl8f.kiosk_profile" --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/studio-a"'
 USERPASSWORD="liveuser"
