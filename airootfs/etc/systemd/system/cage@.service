@@ -25,7 +25,7 @@ After=getty@%i.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --profile "/home/live/.mozilla/firefox/m1j0kl8f.kiosk_profile" --no-remote --private --start-fullscreen --disable-popup-blocking --no-proxy-server --private-window "https://google.com"
+ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --profile "/home/live/.mozilla/firefox/m1j0kl8f.kiosk_profile" --kiosk --no-remote --start-fullscreen --no-proxy-server "https://google.com"
 Restart=always
 User=live
 # Log this user with utmp, letting it show up with commands 'w' and
