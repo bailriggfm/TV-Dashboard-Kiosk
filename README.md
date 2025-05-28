@@ -37,4 +37,4 @@ Firefox is configured on all users with a custom default firefox profile. This p
 
 This firefox config also sets various settings to create a more secure kiosk environment like disabling passwords, multiple tabs, and various developer tools.
 
-The specifics of this can be edited/viewed in `airootfs/etc/firefox/policies/policies.json`. These settings are applied to all users by default.
+The specifics of this can be edited/viewed in `airootfs/etc/firefox/policies/policies.json` and `airootfs/etc/skel/.mozilla/firefox/m1j0kl8f.kiosk_profile/user.js`. These settings are applied to all users by default.
