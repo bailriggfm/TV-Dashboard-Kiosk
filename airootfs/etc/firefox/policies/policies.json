@@ -12,10 +12,490 @@
     "BlockAbout:preferences": true,
     "BlockAbout:logins": true,
     "BlockAbout:downloads": true,
+    "OfferToSaveLogins": false,
+    "OfferToSaveLoginsDefault": false,
+    "DisableFirefoxAccounts": true,
+    "DisableFirefoxScreenshots": true,
+    "DisableFirefoxStudies": true,
+    "DisableFormHistory": true,
+    "DisableMasterPasswordCreation": true,
+    "DisablePocket": true,
+    "DisableProfileImport": true,
+    "DisableProfileRefresh": true,
+    "DisableSecurityBypass": {
+      "InvalidCertificate": false,
+      "SafeBrowsing": false
+    },
+    "DisableSetDesktopBackground": true,
+    "DisplayBookmarksToolbar": "never",
+    "DisplayMenuBar": "always",
+    "DontCheckDefaultBrowser": true,
+    "EncryptedMediaExtensions": {
+      "Enabled": true,
+      "Locked": true
+    },
     "ExtensionSettings": {
       "*": {
         "blocked_install_message": "Extension installations are disabled in kiosk mode.",
         "installation_mode": "blocked"
+      }
+    },
+    "FirefoxHome": {
+      "Search": false,
+      "TopSites": false,
+      "SponsoredTopSites": false,
+      "Highlights": false,
+      "Pocket": false,
+      "SponsoredPocket": false,
+      "Snippets": false,
+      "Locked": true
+    },
+    "FirefoxSuggest": {
+      "WebSuggestions": false,
+      "SponsoredSuggestions": false,
+      "ImproveSuggest": false,
+      "Locked": true
+    },
+    "GoToIntranetSiteForSingleWordEntryInAddressBar": true,
+    "HardwareAcceleration": true,
+    "LegacySameSiteCookieBehaviorEnabled": false,
+    "NewTabPage": false,
+    "NoDefaultBookmarks": true,
+    "OverrideFirstRunPage": "",
+    "OverridePostUpdatePage": "",
+    "PasswordManagerEnabled": false,
+    "PictureInPicture": {
+      "Enabled": false,
+      "Locked": true
+    },
+    "PrimaryPassword": false,
+    "PrintingEnabled": true,
+    "PrivateBrowsingModeAvailability": 2,
+    "RequestedLocales": "en-GB",
+    "SanitizeOnShutdown": {
+      "Cache": true,
+      "Cookies": true,
+      "History": true,
+      "Sessions": true,
+      "SiteSettings": true,
+      "Locked": true
+    },
+    "SearchSuggestEnabled": false,
+    "ShowHomeButton": false,
+    "SkipTermsOfUse": true,
+    "UserMessaging": {
+      "ExtensionRecommendations": false,
+      "FeatureRecommendations": false,
+      "UrlbarInterventions": false,
+      "SkipOnboarding": true,
+      "MoreFromMozilla": false,
+      "FirefoxLabs": false,
+      "Locked": true
+    },
+    "Preferences": {
+      "media.autoplay.default": {
+        "Value": 0,
+        "Status": "locked"
+      },
+      "media.autoplay.allow-muted": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "media.autoplay.blocking_policy": {
+        "Value": 0,
+        "Status": "locked"
+      },
+      "media.autoplay.enabled.user-gestures-needed": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "media.autoplay.block-event.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "media.autoplay.enabled": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "browser.privatebrowsing.autostart": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "browser.startup.page": {
+        "Value": 0,
+        "Status": "locked"
+      },
+      "browser.startup.homepage": {
+        "Value": "about:blank",
+        "Status": "locked"
+      },
+      "browser.fullscreen.autohide": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "browser.fullscreen.animateUp": {
+        "Value": 0,
+        "Status": "locked"
+      },
+      "dom.disable_open_during_load": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.tabs.warnOnClose": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.tabs.warnOnOpen": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "toolkit.startup.max_resumed_crashes": {
+        "Value": -1,
+        "Status": "locked"
+      },
+      "browser.link.open_newwindow": {
+        "Value": 1,
+        "Status": "locked"
+      },
+      "browser.link.open_newwindow.restriction": {
+        "Value": 0,
+        "Status": "locked"
+      },
+      "browser.startup.homepage_override.mstone": {
+        "Value": "ignore",
+        "Status": "locked"
+      },
+      "browser.aboutwelcome.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.aboutwelcome.browser.places/import_history": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.newtabpage.activity-stream.feeds.section.topstories": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.newtabpage.activity-stream.showSponsored": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.newtabpage.activity-stream.showSponsoredTopSites": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.sessionstore.resume_from_crash": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "startup.homepage_welcome_url": {
+        "Value": "",
+        "Status": "locked"
+      },
+      "startup.homepage_welcome_url.additional": {
+        "Value": "",
+        "Status": "locked"
+      },
+      "browser.onboarding.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.onboarding.state": {
+        "Value": "",
+        "Status": "locked"
+      },
+      "browser.onboarding.showFirstRunUI": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.shell.checkDefaultBrowser": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "toolkit.telemetry.reportingpolicy.firstRun": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "toolkit.telemetry.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "toolkit.telemetry.unified": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "toolkit.telemetry.archive.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "toolkit.telemetry.server": {
+        "Value": "",
+        "Status": "locked"
+      },
+      "toolkit.telemetry.shutdownPingSender.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "toolkit.telemetry.newProfilePing.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "toolkit.telemetry.bhrPing.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "toolkit.telemetry.firstShutdownPing.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "toolkit.telemetry.updatePing.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "toolkit.telemetry.hybridContent.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "experiments.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "experiments.supported": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "experiments.activeExperiment": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "experiments.manifest.uri": {
+        "Value": "",
+        "Status": "locked"
+      },
+      "experiments.enabledScopes": {
+        "Value": "",
+        "Status": "locked"
+      },
+      "network.allow-experiments": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "app.shield.optoutstudies.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "app.shield.optoutstudies.telemetry": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "datareporting.healthreport.service.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "datareporting.healthreport.uploadEnabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "datareporting.policy.dataSubmissionEnabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "datareporting.policy.dataSubmissionPolicyAcceptedVersion": {
+        "Value": 2,
+        "Status": "locked"
+      },
+      "datareporting.policy.dataSubmissionPolicyBypassNotification": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "app.normandy.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "app.normandy.api_url": {
+        "Value": "",
+        "Status": "locked"
+      },
+      "app.normandy.first_run": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "breakpad.reportURL": {
+        "Value": "",
+        "Status": "locked"
+      },
+      "browser.crashReports.unsubmittedCheck.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.crashReports.unsubmittedCheck.autoSubmit": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.urlbar.suggest.history": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.urlbar.suggest.bookmark": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.urlbar.suggest.openpage": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.urlbar.suggest.topsites": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "extensions.htmlaboutaddons.recommendations.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "extensions.pocket.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "dom.event.contextmenu.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "middlemouse.openNewWindow": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "accessibility.typeaheadfind": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.tabs.allowTabDetach": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.search.suggest.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.search.suggest.enabled.private": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "extensions.activeThemeID": {
+        "Value": "firefox-dark@mozilla.org",
+        "Status": "locked"
+      },
+      "ui.systemUsesDarkTheme": {
+        "Value": 1,
+        "Status": "locked"
+      },
+      "places.history.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.formfill.enable": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "signon.management.page.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "signon.rememberSignons": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "signon.autofillForms": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "extensions.formautofill.creditCards.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "extensions.formautofill.addresses.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "privacy.sanitize.sanitizeOnShutdown": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "privacy.clearOnShutdown.cache": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "privacy.clearOnShutdown.cookies": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "privacy.clearOnShutdown.downloads": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "privacy.clearOnShutdown.formdata": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "privacy.clearOnShutdown.history": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "privacy.clearOnShutdown.sessions": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "privacy.clearOnShutdown.siteSettings": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "privacy.clearOnShutdown.offlineApps": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "network.cookie.cookieBehavior": {
+        "Value": 1,
+        "Status": "locked"
+      },
+      "network.cookie.lifetimePolicy": {
+        "Value": 2,
+        "Status": "locked"
+      },
+      "browser.download.useDownloadDir": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.download.manager.showWhenStarting": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.download.manager.focusWhenStarting": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.download.panel.shown": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.download.manager.retention": {
+        "Value": 0,
+        "Status": "locked"
+      },
+      "browser.cache.disk.enable": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.cache.memory.enable": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "network.dns.disablePrefetch": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "network.http.speculative-parallel-limit": {
+        "Value": 0,
+        "Status": "locked"
       }
     }
   }
