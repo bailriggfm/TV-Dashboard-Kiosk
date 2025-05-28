@@ -12,6 +12,31 @@ user_pref("media.autoplay.block-event.enabled", false);
 // Remove UI permission prompts
 user_pref("media.autoplay.enabled", true);
 
+// ===== Always start a private session by default =====
+// Always use private browsing mode
+user_pref("browser.privatebrowsing.autostart", true);
+
+// ===== Kiosk Behaviours =====
+// Set homepage or startup page
+user_pref("browser.startup.page", 1); // 1 = homepage
+user_pref("browser.startup.homepage", "about:blank");
+
+// Start in fullscreen (not guaranteed to work without --kiosk or --start-fullscreen)
+user_pref("browser.fullscreen.autohide", false);
+user_pref("browser.fullscreen.animateUp", 0);
+
+// Disable popup blocking
+user_pref("dom.disable_open_during_load", false);
+
+// Set kiosk-like restrictions
+user_pref("browser.tabs.warnOnClose", false);
+user_pref("browser.tabs.warnOnOpen", false);
+user_pref("toolkit.startup.max_resumed_crashes", -1);
+
+// Disable new windows/tabs (UI will be hidden anyway)
+user_pref("browser.link.open_newwindow", 1);
+user_pref("browser.link.open_newwindow.restriction", 0);
+
 // ===== Disable all First Run in Firefox =====
 
 // Disable "What's New" pages on startup or after update
@@ -84,3 +109,46 @@ user_pref("browser.crashReports.unsubmittedCheck.autoSubmit", false);
 user_pref("extensions.activeThemeID", "firefox-dark@mozilla.org");
 // Force websites to use dark theme (dark mode for web content)
 user_pref("ui.systemUsesDarkTheme", 1);
+
+// ===== Disallow Firefox saving any data =====
+
+// Disable saving history
+user_pref("places.history.enabled", false);
+
+// Disable saving form and search history
+user_pref("browser.formfill.enable", false);
+
+// Disable saving passwords
+user_pref("signon.rememberSignons", false);
+
+// Kiosk: Disable autofill
+user_pref("signon.autofillForms", false);
+
+// Disable saving credit card data
+user_pref("extensions.formautofill.creditCards.enabled", false);
+
+// Disable autofill addresses
+user_pref("extensions.formautofill.addresses.enabled", false);
+
+// ===== Clear all firefox data on exit =====
+// Clear all specified data on shutdown
+user_pref("privacy.sanitize.sanitizeOnShutdown", true);
+
+// Set what to clear on shutdown
+user_pref("privacy.clearOnShutdown.cache", true);
+user_pref("privacy.clearOnShutdown.cookies", true);
+user_pref("privacy.clearOnShutdown.downloads", true);
+user_pref("privacy.clearOnShutdown.formdata", true);
+user_pref("privacy.clearOnShutdown.history", true);
+user_pref("privacy.clearOnShutdown.sessions", true);
+user_pref("privacy.clearOnShutdown.siteSettings", true);
+user_pref("privacy.clearOnShutdown.offlineApps", true);
+
+// ===== Cookie rules =====
+// Block third-party cookies
+user_pref("network.cookie.cookieBehavior", 1); // 1 = block third-party
+
+// Clear cookies when Firefox is closed
+user_pref("network.cookie.lifetimePolicy", 2);
+
+

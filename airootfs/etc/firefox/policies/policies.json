@@ -1,0 +1,22 @@
+{
+  "policies": {
+    "DisableDeveloperTools": true,
+    "DisablePrivateBrowsing": false,
+    "DisableSafeMode": true,
+    "DisableSystemAddonUpdate": false,
+    "DisableTelemetry": true,
+    "BlockAboutConfig": true,
+    "BlockAboutSupport": true,
+    "BlockAboutAddons": true,
+    "BlockAboutProfiles": true,
+    "BlockAbout:preferences": true,
+    "BlockAbout:logins": true,
+    "BlockAbout:downloads": true,
+    "ExtensionSettings": {
+      "*": {
+        "blocked_install_message": "Extension installations are disabled in kiosk mode.",
+        "installation_mode": "blocked"
+      }
+    }
+  }
+}
