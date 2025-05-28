@@ -9,8 +9,8 @@ fi
 
 # CONFIG
 ISO_LABEL="ArchLinux-Kiosk"
-ISO1_EXEC='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --profile "/home/live/.mozilla/firefox/m1j0kl8f.kiosk_profile" --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/office?pass=primary"'
-ISO2_EXEC='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --profile "/home/live/.mozilla/firefox/m1j0kl8f.kiosk_profile" --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/studio-a"'
+ISO1_EXEC='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/office?pass=primary"'
+ISO2_EXEC='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/studio-a"'
 USERPASSWORD="liveuser"
 
 # Do not change these unless you have changed the coressponding files.
