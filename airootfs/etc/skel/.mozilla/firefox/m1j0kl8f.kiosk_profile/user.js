@@ -16,7 +16,7 @@ user_pref("media.autoplay.enabled", true);
 // Always use private browsing mode
 user_pref("browser.privatebrowsing.autostart", true);
 
-// ===== Kiosk Behaviours =====
+// ===== Kiosk Like Behaviours =====
 // Set homepage or startup page
 user_pref("browser.startup.page", 1); // 1 = homepage
 user_pref("browser.startup.homepage", "about:blank");
@@ -104,6 +104,35 @@ user_pref("breakpad.reportURL", "");
 user_pref("browser.crashReports.unsubmittedCheck.enabled", false);
 user_pref("browser.crashReports.unsubmittedCheck.autoSubmit", false);
 
+// ===== UI Customisations =====
+// Disable address bar suggestions
+user_pref("browser.urlbar.suggest.history", false);
+user_pref("browser.urlbar.suggest.bookmark", false);
+user_pref("browser.urlbar.suggest.openpage", false);
+user_pref("browser.urlbar.suggest.topsites", false);
+
+// Disable add-on recommendations
+user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
+
+// Disable Pocket integration
+user_pref("extensions.pocket.enabled", false);
+
+// Disable context menu (right-click)
+user_pref("dom.event.contextmenu.enabled", false);
+
+// Prevent middle-click from opening new tabs
+user_pref("middlemouse.openNewWindow", false);
+
+// Hide the Find bar shortcut
+user_pref("accessibility.typeaheadfind", false);
+
+// Disable drag-and-drop of tabs
+user_pref("browser.tabs.allowTabDetach", false);
+
+// Disable search engine suggestions
+user_pref("browser.search.suggest.enabled", false);
+user_pref("browser.search.suggest.enabled.private", false);
+
 // ===== Set the theme to a dark theme =====
 
 user_pref("extensions.activeThemeID", "firefox-dark@mozilla.org");
@@ -119,6 +148,7 @@ user_pref("places.history.enabled", false);
 user_pref("browser.formfill.enable", false);
 
 // Disable saving passwords
+user_pref("signon.management.page.enabled", false);
 user_pref("signon.rememberSignons", false);
 
 // Kiosk: Disable autofill
@@ -151,4 +181,24 @@ user_pref("network.cookie.cookieBehavior", 1); // 1 = block third-party
 // Clear cookies when Firefox is closed
 user_pref("network.cookie.lifetimePolicy", 2);
 
+// ===== Downloads restrictions =====
+// Disable downloads manager UI
+user_pref("browser.download.useDownloadDir", false);
+user_pref("browser.download.manager.showWhenStarting", false);
+user_pref("browser.download.manager.focusWhenStarting", false);
+
+// Automatically clear downloads
+user_pref("browser.download.panel.shown", false);
+user_pref("browser.download.manager.retention", 0);
+
+// ===== Disable cache =====
+// Disable cache
+user_pref("browser.cache.disk.enable", false);
+user_pref("browser.cache.memory.enable", true);
+
+// Disable DNS prefetching
+user_pref("network.dns.disablePrefetch", true);
+
+// Disable speculative connections
+user_pref("network.http.speculative-parallel-limit", 0);
 
