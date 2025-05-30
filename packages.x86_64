@@ -52,7 +52,6 @@ pipewire-audio
 pipewire-ffado
 pipewire-roc
 pipewire-x11-bell
-pipewire-x11-bell
 pipewire-v4l2
 
 lib32-pipewire
