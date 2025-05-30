@@ -10,7 +10,7 @@ open-vm-tools
 #openssh
 pv
 qemu-guest-agent
-syslinux
+#syslinux
 virtualbox-guest-utils-nox
 
 # Linux extras
@@ -31,6 +31,8 @@ plymouth
 # Firmware booting extra options and tui
 dialog
 efibootmgr
+intel-ucode
+amd-ucode
 
 # Networking
 networkmanager
