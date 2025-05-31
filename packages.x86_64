@@ -1,7 +1,6 @@
 # Essentials for an image including VM support
 base
 bash-completion
-archiso
 #hyperv
 linux
 mkinitcpio
