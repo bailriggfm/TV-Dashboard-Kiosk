@@ -1,29 +1,35 @@
 # Essentials for an image including VM support
 base
 bash-completion
-hyperv
+#hyperv
 linux
 mkinitcpio
 mkinitcpio-archiso
 sudo
-open-vm-tools
+#open-vm-tools
 #openssh
-pv
-qemu-guest-agent
+#pv
+#qemu-guest-agent
 syslinux
-virtualbox-guest-utils-nox
+#virtualbox-guest-utils-nox
+nano
+less
+grep
 
 # Linux extras
 linux-headers
 linux-firmware
+intel-ucode
+amd-ucode
 
 # Drivers and extra support
-dkms
-v4l2loopback-dkms
-v4l2loopback-utils
+#dkms
+#v4l2loopback-dkms
+#v4l2loopback-utils
 #nvidia-dkms
 #nvidia-utils
 mesa
+lib32-mesa
 
 # For a pretty boot screen
 plymouth
@@ -36,6 +42,15 @@ efibootmgr
 networkmanager
 firewalld
 ntp
+broadcom-wl
+iw
+iwd
+inetutils
+net-tools
+ndisc6
+wireless-regdb
+wireless_tools
+wpa_supplicant
 
 # GUI environment
 cage
@@ -43,6 +58,8 @@ wlr-randr
 xorg-xwayland
 
 # Audio Support
+alsa-utils
+sof-firmware
 pipewire
 wireplumber
 pipewire-alsa
@@ -51,7 +68,6 @@ pipewire-jack
 pipewire-audio
 pipewire-ffado
 pipewire-roc
-pipewire-x11-bell
 pipewire-x11-bell
 pipewire-v4l2
 
