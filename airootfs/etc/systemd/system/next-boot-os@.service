@@ -2,7 +2,7 @@
 Description=Run Next-Boot-OS Script on TTY %i
 # Make sure we are started after logins are permitted. If Plymouth is
 # used, we want to start when it is on its way out.
-After=systemd-user-sessions.service plymouth-quit-wait.service
+After=systemd-user-sessions.service plymouth-quit-wait.service plymouth-quit.service
 # Wait for network to be online
 Wants=network-online.target
 After=network-online.target
@@ -18,8 +18,6 @@ After=getty@%i.service
 
 [Service]
 Type=simple
-Environment=TTYNUM=%I
-ExecStartPre=/bin/sh -c "/bin/chvt ${TTYNUM#tty}"
 ExecStart=/bin/bash /opt/scripts/Next-Boot-OS.sh
 Restart=always
 RestartSec=1
@@ -34,9 +32,9 @@ TTYReset=yes
 TTYVHangup=yes
 TTYVTDisallocate=yes
 # Fail to start if not controlling the virtual terminal.
-StandardInput=tty-fail
-StandardOutput=tty-fail
-StandardError=tty-fail
+StandardInput=tty
+StandardOutput=tty
+StandardError=tty
 
 # Security hardening - Because our script does not need many permissions at all but root is required.
 # Relax device access for TTY

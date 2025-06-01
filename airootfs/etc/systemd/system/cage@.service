@@ -6,7 +6,7 @@
 Description=Cage Wayland compositor on %I
 # Make sure we are started after logins are permitted. If Plymouth is
 # used, we want to start when it is on its way out.
-After=systemd-user-sessions.service plymouth-quit-wait.service
+After=systemd-user-sessions.service plymouth-quit-wait.service plymouth-quit.service
 # Wait for network to be online
 Wants=network-online.target
 After=network-online.target
