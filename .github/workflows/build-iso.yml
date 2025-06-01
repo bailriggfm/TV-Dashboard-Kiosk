@@ -14,7 +14,7 @@ jobs:
 
       - name: Build ArchISO using docker.
         run: |
-          docker run --rm -v $PWD:/work -w /work archlinux:latest /bin/bash -c "
+          docker run --privileged --rm -v $PWD:/work -w /work archlinux:latest /bin/bash -c "
             pacman -Sy --noconfirm archlinux-keyring archiso edk2-ovmf gnupg grub openssl
             cd /work && ./build.sh
           "
