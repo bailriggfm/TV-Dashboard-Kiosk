@@ -1,12 +1,13 @@
 [Unit]
-Description=Set audio volume to 100%
+Description=Monitor and set audio volume to 100%
 After=pipewire.service pipewire-pulse.service
 Wants=pipewire.service pipewire-pulse.service
 
 [Service]
-Type=oneshot
+Type=simple
 ExecStart=/opt/scripts/set-volume.sh
-RemainAfterExit=yes
+Restart=always
+RestartSec=1
 
 [Install]
 WantedBy=default.target
