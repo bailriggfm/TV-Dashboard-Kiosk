@@ -23,7 +23,7 @@ After building you will need to remove the work directory `../work-iso1`. Before
 
 ## Other Features
 
-Pressing CTRL + ALT + 2 (TTY2) will take you to a TUI allowing you reboot the computer into another boot option detected by UEFI firmware at boot. This can be disabled by removing the `next-boot-os@.service` service and the `next-boot-os@tty2.service` symlink.
+Pressing CTRL + ALT + 2 (TTY2) will take you to a TUI allowing you reboot the computer into another boot option detected by UEFI firmware at boot. This can be disabled by removing the `override.conf` file in the `airootfs/etc/systemd/system/getty@tty2.service.d` folder.
 
 Pressing CTRL + ALT + 3 (TTY3) will automatically log you into a tty as user live.
 
