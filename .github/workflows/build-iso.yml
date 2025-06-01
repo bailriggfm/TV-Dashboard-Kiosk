@@ -3,9 +3,16 @@ name: Build ArchISO
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+
+# Allow one concurrent deployment
+concurrency:
+  group: "build-archiso"
+  cancel-in-progress: false
 
 jobs:
   build-archiso:
+    name: Build ArchISO
     runs-on: ubuntu-latest
 
     steps:
