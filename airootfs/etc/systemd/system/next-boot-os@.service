@@ -19,7 +19,7 @@ After=getty@%i.service
 [Service]
 Type=simple
 Environment=TTYNUM=%I
-ExecStartPre=/bin/sh -c '/bin/chvt ${TTYNUM#tty}'
+ExecStartPre=/bin/sh -c "/bin/chvt ${TTYNUM#tty}"
 ExecStart=/bin/bash /opt/scripts/Next-Boot-OS.sh
 Restart=always
 RestartSec=1
