@@ -19,9 +19,7 @@ After=getty@%i.service
 [Service]
 Type=simple
 
-# Reset terminal to sane state before starting
-ExecStartPre=/bin/stty sane < /dev/%I
-ExecStart=/bin/bash /opt/scripts/Next-Boot-OS.sh
+ExecStart=/bin/bash -l -i /opt/scripts/Next-Boot-OS.sh
 Restart=always
 RestartSec=1
 User=root
