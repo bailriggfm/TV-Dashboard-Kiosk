@@ -60,6 +60,7 @@ xorg-xwayland
 # Audio Support
 alsa-utils
 sof-firmware
+alsa-firmware
 pipewire
 wireplumber
 pipewire-alsa

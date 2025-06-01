@@ -22,5 +22,5 @@ file_permissions=(
   ["/etc/gshadow"]="0:0:0400"
   ["/etc/sudoers.d"]="0:0:0750"
   ["/opt/scripts/Next-Boot-OS.sh"]="0:0:0755"
-  ["/usr/local/bin/livecd-sound"]="0:0:755"
+  ["/opt/scripts/set-volume.sh"]="0:0:0755"
 )
