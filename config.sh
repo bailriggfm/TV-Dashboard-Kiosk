@@ -16,7 +16,8 @@ export ISO_LABEL="Simple-Linux-Kiosk"
 
 
 # RPI CONFIG
-
+export RPIGEN="$BASE_DIR/RPI/pi-gen"
+export RPIGEN_CONFIG="$RPIGEN/config"
 
 # Do not change these values unless you have updated any other relevant files.
 
