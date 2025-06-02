@@ -12,7 +12,7 @@ export USERPASSWORD="liveuser"
 export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://google.com"'
 
 # x86_64 CONFIG
-export ISO_LABEL="ArchLinux-Kiosk"
+export ISO_LABEL="Simple-Linux-Kiosk"
 
 
 # RPI CONFIG

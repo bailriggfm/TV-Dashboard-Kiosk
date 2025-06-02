@@ -1,4 +1,4 @@
-# Arch Kiosk
+# Simple Linux Kiosk
 
 A set of minimal scripts based off the default archiso scripts to setup a minimal arch environment and then launch a kiosk.
 By default this uses firefox but cage (our wayland environment) supports any application.

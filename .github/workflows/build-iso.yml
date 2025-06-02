@@ -1,4 +1,4 @@
-name: Build ArchISO
+name: Build Kiosk
 
 on:
   push:
@@ -7,19 +7,19 @@ on:
 
 # Allow one concurrent deployment
 concurrency:
-  group: "build-archiso"
+  group: "build-kiosk"
   cancel-in-progress: false
 
 jobs:
-  build-archiso:
-    name: Build ArchISO
+  build-kiosk:
+    name: Build Kiosk ISO
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Build ArchISO using docker.
+      - name: Build Kiosk using docker.
         run: |
           docker run --privileged --rm -v $PWD:/work -w /work archlinux:latest /bin/bash -c "
             pacman -Sy --noconfirm archlinux-keyring archiso edk2-ovmf gnupg grub openssl

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-iso_name="ArchLinux-Kiosk"
-iso_label="ARCH_KIOSK_$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%y%m)"
+iso_name="SimpleLinuxKiosk"
+iso_label="LINUX_KIOSK_$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%y%m)"
 iso_publisher="Ava Glass"
-iso_application="Arch Linux Kiosk"
+iso_application="Simple Linux Kiosk"
 iso_version="$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y.%m.%d)"
 install_dir="arch"
 buildmodes=('iso')
