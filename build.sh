@@ -7,45 +7,55 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-# CONFIG
-ISO_LABEL="ArchLinux-Kiosk"
-# Please note that some characters may need to be escaped to work with sed.
-# Such as &. If you want an & you must put \&
-ISO1_EXEC='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --profile "/home/live/.mozilla/firefox/m1j0kl8f.kiosk_profile" --kiosk --no-remote --start-fullscreen --no-proxy-server "https://google.com"'
-USERPASSWORD="liveuser"
+# Check if Docker is installed
+if ! command -v docker &> /dev/null; then
+  echo "Docker is not installed. Please install Docker." >&2
+  exit 1
+fi
 
-# Do not change these unless you have changed the coressponding files.
-CONFIG_DIR="./"
-TARGET_FILE="${CONFIG_DIR}/airootfs/etc/systemd/system/cage@.service"
-USERNAME="live"           # User to update
-USERPASSWORDHASH=$(echo "$USERPASSWORD" | openssl passwd -6 -stdin) # Generate a password with a random salt
-SHADOW_FILE="./airootfs/etc/shadow"  # Path to your shadow file
+# Check if Docker service is running
+if ! systemctl is-active --quiet docker; then
+  read -p "Docker service is not running. Would you like to start it? (y/n): " START_DOCKER
+  if [[ "$START_DOCKER" =~ ^[Yy]$ ]]; then
+    sudo systemctl start docker
+    if ! systemctl is-active --quiet docker; then
+      echo "Failed to start Docker service. Please check your system configuration." >&2
+      exit 1
+    fi
+  else
+    echo "Docker service is required to proceed. Exiting." >&2
+    exit 1
+  fi
+fi
 
-# Save original line
-ORIGINAL_LINE=$(grep '^ExecStart=' "$TARGET_FILE")
-echo "✅ Original line backed up: $ORIGINAL_LINE"
+# Change to the directory of the script
+export BASE_DIR="$(dirname "$0")"
+cd "$BASE_DIR"
 
-# Replace line
-echo "🔧 Patching line for ISO 1..."
-sed -i "s|^ExecStart=.*|$ISO1_EXEC|" "$TARGET_FILE"
+source "$BASE_DIR/config.sh"
 
-echo "🔧 Patching shadow file for ISO 1..."
-sed -i "s|^$USERNAME:[^:]*:|$USERNAME:$USERPASSWORDHASH:|" "$SHADOW_FILE"
+# Prompt the user to select the build type
+echo "Which image would you like to build?"
+echo "1) x86_64"
+echo "2) RPI"
+read -p "Enter the number of your choice: " BUILD_CHOICE
 
-# Build first ISO
-echo "▶️ Building first ISO..."
-mkarchiso -v -w ../work-iso1 -o ../out-iso1 "$CONFIG_DIR"
+case $BUILD_CHOICE in
+  1)
+    echo "Building x86_64 image..."
+    cp -r "$BASE_DIR/x86_64/." "$CONFIG_DIR"
+    cp -r "$BASE_DIR/airootfs-shared/." "$CONFIG_DIR/airootfs/"
+    "$BASE_DIR/x86_64/build-x86_64.sh"
+    ;;
+  2)
+    echo "Building RPI image..."
+    cp -r "$BASE_DIR/RPI/." "$CONFIG_DIR"
+    cp -r "$BASE_DIR/airootfs-shared/." "$CONFIG_DIR/airootfs/"
+    "$BASE_DIR/RPI/build-RPI.sh"
+    ;;
+  *)
+    echo "Invalid choice. Exiting."
+    exit 1
+    ;;
+esac
 
-# Restore original line
-echo "♻️ Restoring original config..."
-sed -i "s|^ExecStart=.*|$ORIGINAL_LINE|" "$TARGET_FILE"
-sed -i "s|^$USERNAME:[^:]*:|$USERNAME:CHANGE_ME:|" "$SHADOW_FILE"
-
-echo "🔧 Moving ISO"
-# Get current build date in YYYY-MM-DD format
-ISO_BUILD_DATE=$(date +%F)
-mkdir -p ./build
-mv ../out-iso1/ArchLinux-Kiosk*.iso "./build/ArchLinux-Kiosk-${ISO_BUILD_DATE}.iso"
-rmdir ../out-iso*
-
-echo "✅ Done! ISO built."

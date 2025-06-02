@@ -1,3 +1,0 @@
-%wheel ALL=(ALL:ALL) ALL
-
-%wheel ALL=(ALL) NOPASSWD: /opt/scripts/Next-Boot-OS.sh

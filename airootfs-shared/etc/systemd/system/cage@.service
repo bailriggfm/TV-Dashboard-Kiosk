@@ -30,9 +30,9 @@ Environment="XKB_DEFAULT_MODEL=pc105"
 Environment="XKB_DEFAULT_LAYOUT=gb"
 Environment="XKB_DEFAULT_VARIANT="
 Environment="XKB_DEFAULT_OPTIONS="
-ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --profile "/home/live/.mozilla/firefox/m1j0kl8f.kiosk_profile" --kiosk --no-remote --start-fullscreen --no-proxy-server "https://google.com"
+ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://google.com"
 Restart=always
-User=live
+User=<user>
 # Log this user with utmp, letting it show up with commands 'w' and
 # 'who'. This is needed since we replace (a)getty.
 UtmpIdentifier=%I
