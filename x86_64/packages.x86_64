@@ -8,7 +8,7 @@ mkinitcpio-archiso
 sudo
 #open-vm-tools
 #openssh
-#pv
+pv
 #qemu-guest-agent
 syslinux
 #virtualbox-guest-utils-nox
