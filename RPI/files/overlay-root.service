@@ -2,10 +2,14 @@
 Description=Boot with root filesystem overlay (read-only base)
 After=multi-user.target
 Before=cage@*.service
+# Make cage services explicitly require this service to complete successfully
+RequiredBy=cage@*.service
 
 [Service]
 Type=oneshot
 ExecStart=/opt/scripts/overlay-root.sh
+# Set a reasonable timeout to prevent hanging if script has issues
+TimeoutSec=240s
 RemainAfterExit=yes
 
 [Install]
