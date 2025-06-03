@@ -19,8 +19,9 @@ echo "🔧 Patching TTY3 for autologin..."
 sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY3_SERVICE"
 
 echo "🔧 Patching Stages..."
-patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/01-sys-tweaks-packages-patch.patch"
+patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/01-sys-tweaks-packages-patch.patch"
 rm "$RPIGEN/stage2/01-sys-tweaks/00-patches/02-swap.diff"
+patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/02-readonly-cmdline.patch"
 
 echo "🔧 Creating our own step..."
 mkdir -p "$RPIGEN/stage2/99-kiosk-config"
@@ -80,7 +81,15 @@ export GIT_HASH=${GIT_HASH:-"$(git rev-parse HEAD)"}
 sed -i "s|export GIT_HASH=${GIT_HASH:-\"$(git rev-parse HEAD)\"}|export GIT_HASH=${GIT_HASH:-\"$GIT_HASH\"}|" "$RPIGEN/build.sh"
 sed -i "s|export GIT_HASH=${GIT_HASH:-\"$(git rev-parse HEAD)\"}|export GIT_HASH=${GIT_HASH:-\"$GIT_HASH\"}|" "$RPIGEN/build-docker.sh"
 
+echo "🔧 Merging airootfs..."
 mv "$CONFIG_DIR/airootfs" "$CONFIG_DIR/pi-gen/airootfs"
+
+echo "🔧 Making system ReadOnly..."
+install -m 755 "$CONFIG_DIR/files/overlay-root.sh" "${ROOTFS_DIR}/usr/local/sbin/"
+install -m 644 "$CONFIG_DIR/files/overlay-root.service" "${ROOTFS_DIR}/etc/systemd/system/"
+on_chroot << EOF
+systemctl enable overlay-root.service
+EOF
 
 echo "▶️ Building Image..."
 cd "$CONFIG_DIR/pi-gen"
