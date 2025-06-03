@@ -29,7 +29,9 @@ cat <<EOF > $RPIGEN/stage2/99-kiosk-config/01-run.sh
 #!/bin/bash -e
 # Copy the contents of /pi-gen/airootfs into it
 cp -a /pi-gen/airootfs/. "\${ROOTFS_DIR}/"
-chmod 755 -R "\${ROOTFS_DIR}/opt/scripts"
+chown -hR root:root "\${ROOTFS_DIR}/opt/scripts"
+chmod -hR 755 "\${ROOTFS_DIR}/opt/scripts"
+
 
 install -m 755 "/pi-gen/files/overlay-root.sh" "\${ROOTFS_DIR}/opt/scripts/"
 install -m 644 "/pi-gen/files/overlay-root.service" "\${ROOTFS_DIR}/etc/systemd/system/"
