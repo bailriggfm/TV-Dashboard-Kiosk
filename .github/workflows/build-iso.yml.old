@@ -23,7 +23,7 @@ jobs:
         run: |
           docker run --privileged --rm -v $PWD:/work -w /work archlinux:latest /bin/bash -c "
             pacman -Sy --noconfirm archlinux-keyring archiso edk2-ovmf gnupg grub openssl
-            cd /work && ./build.sh
+            cd /work && ./build.sh <<< "1"
           "
       - name: Upload built ISO
         uses: actions/upload-artifact@v4
