@@ -21,6 +21,6 @@ file_permissions=(
   ["/etc/shadow"]="0:0:0400"
   ["/etc/gshadow"]="0:0:0400"
   ["/etc/sudoers.d"]="0:0:0750"
-  ["/opt/scripts/Next-Boot-OS.sh"]="0:0:0755"
+  ["/opt/scripts/next-boot-os.sh"]="0:0:0755"
   ["/opt/scripts/set-volume.sh"]="0:0:0755"
 )
