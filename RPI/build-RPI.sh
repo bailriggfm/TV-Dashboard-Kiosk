@@ -31,6 +31,9 @@ cat <<EOF > $RPIGEN/stage2/99-kiosk-config/01-run.sh
 cp -a /pi-gen/airootfs/. "\${ROOTFS_DIR}/"
 chmod 755 -R "\${ROOTFS_DIR}/opt/scripts"
 
+install -m 755 "/pi-gen/files/overlay-root.sh" "\${ROOTFS_DIR}/usr/local/sbin/"
+install -m 644 "/pi-gen/files/overlay-root.service" "\${ROOTFS_DIR}/etc/systemd/system/"
+
 on_chroot <<END
   systemctl enable overlay-root.service
 END
@@ -87,10 +90,7 @@ sed -i "s|export GIT_HASH=${GIT_HASH:-\"$(git rev-parse HEAD)\"}|export GIT_HASH
 
 echo "🔧 Merging airootfs..."
 mv "$CONFIG_DIR/airootfs" "$CONFIG_DIR/pi-gen/airootfs"
-
-echo "🔧 Making system ReadOnly..."
-install -m 755 "$CONFIG_DIR/files/overlay-root.sh" "${ROOTFS_DIR}/usr/local/sbin/"
-install -m 644 "$CONFIG_DIR/files/overlay-root.service" "${ROOTFS_DIR}/etc/systemd/system/"
+mv "$CONFIG_DIR/files" "$CONFIG_DIR/pi-gen/"
 
 echo "▶️ Building Image..."
 cd "$CONFIG_DIR/pi-gen"
