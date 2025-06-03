@@ -56,6 +56,7 @@ pipewire-jack
 pipewire-audio
 pipewire-v4l2
 firefox
+overlayroot
 EOF
 
 echo "🔧 Setting up config..."
