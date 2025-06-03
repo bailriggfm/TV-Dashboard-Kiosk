@@ -5,6 +5,41 @@
 
 set -e
 
+if ! FWLOC=$(/usr/lib/raspberrypi-sys-mods/get_fw_loc); then
+  whiptail --msgbox "Could not determine firmware partition" 20 60
+  poweroff -f
+fi
+
+CMDLINE="$FWLOC/cmdline.txt"
+
+# Check if cmdline.txt exists
+if [ ! -f "$CMDLINE" ]; then
+    echo "Error: $CMDLINE not found."
+    exit 1
+fi
+
+# Check for the init override
+if grep -q 'init=/usr/lib/raspberrypi-sys-mods/firstboot' "$CMDLINE"; then
+    echo "Found init=/usr/lib/raspberrypi-sys-mods/firstboot in cmdline.txt. Exiting."
+    exit 0
+fi
+
+# Check if 'ro' is already present
+if ! grep -qw '\bro\b' "$CMDLINE"; then
+    echo "'ro' not found in cmdline.txt. Adding it now..."
+    sed -i -E 's/\<(root=[^ ]+)\>([ ]+)?(rw)?/\1 ro/' "$CMDLINE"
+
+    echo "Updated cmdline.txt:"
+    cat "$CMDLINE"
+
+    echo "Rebooting to apply changes..."
+    sync
+    reboot
+    exit 0
+else
+    echo "'ro' is already set in cmdline.txt. No changes needed."
+fi
+
 # Skip overlay if already running in overlay
 if mountpoint -q /ro; then
     echo "Already using overlay. Skipping setup."

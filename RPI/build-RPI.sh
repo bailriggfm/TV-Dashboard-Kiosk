@@ -21,7 +21,6 @@ sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY3_SERVICE"
 echo "🔧 Patching Stages..."
 patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/01-sys-tweaks-packages-patch.patch"
 rm "$RPIGEN/stage2/01-sys-tweaks/00-patches/02-swap.diff"
-patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/02-readonly-cmdline.patch"
 
 echo "🔧 Creating our own step..."
 mkdir -p "$RPIGEN/stage2/99-kiosk-config"
