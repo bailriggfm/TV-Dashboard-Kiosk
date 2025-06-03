@@ -9,8 +9,8 @@ export USERPASSWORD="liveuser"
 # Cage service configuration
 # Please note that some characters may need to be escaped to work with sed.
 # Such as &. If you want an & you must put \&
-export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --profile "/home/live/.mozilla/firefox/m1j0kl8f.kiosk_profile" --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/office?pass=primary"'
-#export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --profile "/home/live/.mozilla/firefox/m1j0kl8f.kiosk_profile" --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/studio-a"'
+export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/office?pass=primary"'
+#export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/studio-a"'
 
 # x86_64 CONFIG
 
