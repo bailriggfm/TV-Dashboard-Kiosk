@@ -1,13 +1,12 @@
 [Unit]
 Description=Boot with root filesystem overlay (read-only base)
-DefaultDependencies=no
-Before=sysinit.target local-fs.target
-After=initrd.target
+After=multi-user.target
+Before=cage@*.service
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/sbin/overlay-root.sh
+ExecStart=/opt/scripts/overlay-root.sh
 RemainAfterExit=yes
 
 [Install]
-WantedBy=sysinit.target
+WantedBy=multi-user.target
