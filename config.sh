@@ -14,8 +14,19 @@ export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kios
 # x86_64 CONFIG
 
 # RPI CONFIG
-export RPIGEN="$BASE_DIR/RPI/pi-gen"
-export RPIGEN_CONFIG="$RPIGEN/config"
+export RPI_IMG_NAME='SimpleLinuxKiosk-RPI'
+export RPI_PI_GEN_RELEASE='Simple Linux Kiosk - Raspberry Pi Version'
+export RPI_DEPLOY_COMPRESSION='xz'
+export RPI_COMPRESSION_LEVEL='9'
+export RPI_USE_QEMU='0'
+export RPI_LOCALE_DEFAULT='en_GB.UTF-8'
+export RPI_TARGET_HOSTNAME='rpi-kiosk'
+export RPI_KEYBOARD_KEYMAP='gb'
+export RPI_KEYBOARD_LAYOUT='English (UK)'
+export RPI_TIMEZONE_DEFAULT='Europe/London'
+export RPI_DISABLE_FIRST_BOOT_USER_RENAME='1'
+export RPI_WPA_COUNTRY='GB'
+export RPI_ENABLE_SSH='0'
 
 # Do not change these values unless you have updated any other relevant files.
 

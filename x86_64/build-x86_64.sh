@@ -12,10 +12,12 @@ echo "🔧 Patching Cage Service..."
 sed -i "s|^ExecStart=.*|$CAGEEXECSTART_LINE|" "$CAGE_SERVICE_PATH"
 sed -i "s/^User=<user>/User=$USERNAME/" "$CAGE_SERVICE_PATH"
 
+echo "🔧 Patching TTY3 for autologin..."
+sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY3_SERVICE"
+
 echo "🔧 Setting up user $USERNAME..."
 sed -i "s|^<user>:[^:]*:|$USERNAME:$USERPASSWORDHASH:|" "$SHADOW_FILE"
 sed -i "s/\b<user>\b/$USERNAME/g" "$GROUP_FILE"
-sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY3_SERVICE"
 sed -i "s/^<user>:.*$/$USERNAME:!*::/" "$GSHADOW_FILE"
 sed -i "s/^<user>:/$USERNAME:/" "$PASSWD_FILE"
 

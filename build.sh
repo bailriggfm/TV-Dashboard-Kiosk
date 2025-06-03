@@ -29,7 +29,7 @@ if ! systemctl is-active --quiet docker; then
 fi
 
 # Change to the directory of the script
-export BASE_DIR="$(dirname "$0")"
+export BASE_DIR="$(realpath "$(dirname "$0")")"
 cd "$BASE_DIR"
 
 source "$BASE_DIR/config.sh"
