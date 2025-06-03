@@ -37,8 +37,8 @@ else
     echo "⚠️ Pattern not found in $GSHADOW_FILE"
 fi
 
-if grep -q "^<user>:" "$PASSWD_FILE"; then
-    sed -i "s/^<user>:/$USERNAME:/g" "$PASSWD_FILE" &&
+if grep -q "<user>" "$PASSWD_FILE"; then
+    sed -i "s/<user>/$USERNAME/g" "$PASSWD_FILE" &&
     echo "✅ Updated $PASSWD_FILE" || echo "❌ Failed to update $PASSWD_FILE"
 else
     echo "⚠️ Pattern not found in $PASSWD_FILE"
