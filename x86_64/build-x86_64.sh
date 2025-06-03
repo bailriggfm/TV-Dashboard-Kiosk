@@ -16,7 +16,6 @@ echo "🔧 Patching TTY3 for autologin..."
 sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY3_SERVICE"
 
 echo "🔧 Setting up user $USERNAME..."
-
 if grep -q "^<user>:" "$SHADOW_FILE"; then
     sed -i "s|^<user>:[^:]*:|$USERNAME:$USERPASSWORDHASH:|" "$SHADOW_FILE" &&
     echo "✅ Updated $SHADOW_FILE" || echo "❌ Failed to update $SHADOW_FILE"
@@ -39,7 +38,7 @@ else
 fi
 
 if grep -q "^<user>:" "$PASSWD_FILE"; then
-    sed -i "s/^<user>:/ $USERNAME:/g" "$PASSWD_FILE" &&
+    sed -i "s/^<user>:/$USERNAME:/g" "$PASSWD_FILE" &&
     echo "✅ Updated $PASSWD_FILE" || echo "❌ Failed to update $PASSWD_FILE"
 else
     echo "⚠️ Pattern not found in $PASSWD_FILE"
