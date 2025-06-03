@@ -16,10 +16,34 @@ echo "🔧 Patching TTY3 for autologin..."
 sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY3_SERVICE"
 
 echo "🔧 Setting up user $USERNAME..."
-sed -i "s|^<user>:[^:]*:|$USERNAME:$USERPASSWORDHASH:|" "$SHADOW_FILE"
-sed -i "s/\b<user>\b/$USERNAME/g" "$GROUP_FILE"
-sed -i "s/^<user>:.*$/$USERNAME:!*::/" "$GSHADOW_FILE"
-sed -i "s/^<user>:/$USERNAME:/" "$PASSWD_FILE"
+
+if grep -q "^<user>:" "$SHADOW_FILE"; then
+    sed -i "s|^<user>:[^:]*:|$USERNAME:$USERPASSWORDHASH:|" "$SHADOW_FILE" &&
+    echo "✅ Updated $SHADOW_FILE" || echo "❌ Failed to update $SHADOW_FILE"
+else
+    echo "⚠️ Pattern not found in $SHADOW_FILE"
+fi
+
+if grep -q "<user>" "$GROUP_FILE"; then
+    sed -i "s/<user>/$USERNAME/g" "$GROUP_FILE" &&
+    echo "✅ Updated $GROUP_FILE" || echo "❌ Failed to update $GROUP_FILE"
+else
+    echo "⚠️ Pattern not found in $GROUP_FILE"
+fi
+
+if grep -q "^<user>:" "$GSHADOW_FILE"; then
+    sed -i "s/^<user>:.*$/$USERNAME:!*::/g" "$GSHADOW_FILE" &&
+    echo "✅ Updated $GSHADOW_FILE" || echo "❌ Failed to update $GSHADOW_FILE"
+else
+    echo "⚠️ Pattern not found in $GSHADOW_FILE"
+fi
+
+if grep -q "^<user>:" "$PASSWD_FILE"; then
+    sed -i "s/^<user>:/ $USERNAME:/g" "$PASSWD_FILE" &&
+    echo "✅ Updated $PASSWD_FILE" || echo "❌ Failed to update $PASSWD_FILE"
+else
+    echo "⚠️ Pattern not found in $PASSWD_FILE"
+fi
 
 echo "▶️ Downloading latest ArchLinux Docker Image..."
 if ! docker pull archlinux:latest; then
