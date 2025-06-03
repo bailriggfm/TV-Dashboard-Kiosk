@@ -49,9 +49,27 @@ case $BUILD_CHOICE in
     ;;
   2)
     echo "Building RPI image..."
-    cp -r "$BASE_DIR/RPI/." "$CONFIG_DIR"
-    cp -r "$BASE_DIR/airootfs-shared/." "$CONFIG_DIR/airootfs/"
-    "$BASE_DIR/RPI/build-RPI.sh"
+    read -p "Would you like to build a 32-bit or 64-bit RPI image? (32/64): " RPI_ARCH
+    case $RPI_ARCH in
+      32)
+        echo "Building 32-bit RPI image..."
+        cp -r "$BASE_DIR/RPI/." "$CONFIG_DIR"
+        cp -r "$BASE_DIR/airootfs-shared/." "$CONFIG_DIR/airootfs/"
+        "$BASE_DIR/RPI/build-RPI.sh"
+        ;;
+      64)
+        echo "Building 64-bit RPI image..."
+        git -C "$BASE_DIR/RPI/pi-gen" checkout arm64
+        cp -r "$BASE_DIR/RPI/." "$CONFIG_DIR"
+        cp -r "$BASE_DIR/airootfs-shared/." "$CONFIG_DIR/airootfs/"
+        "$BASE_DIR/RPI/build-RPI.sh"
+        git -C "$BASE_DIR/RPI/pi-gen" checkout master
+        ;;
+      *)
+        echo "Invalid choice. Exiting."
+        exit 1
+        ;;
+    esac
     ;;
   *)
     echo "Invalid choice. Exiting."
