@@ -20,7 +20,7 @@ export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- \
 # Option if using chromium instead of firefox
 #export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- \
 #    /usr/bin/chromium \
-#    --kiosk https://google.com \
+#    --kiosk "https://google.com" \
 #    --noerrdialogs \
 #    --disable-infobars \
 #    --incognito \
