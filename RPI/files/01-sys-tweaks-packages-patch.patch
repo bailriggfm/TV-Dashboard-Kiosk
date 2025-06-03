@@ -1,0 +1,67 @@
+diff --git a/stage2/01-sys-tweaks/00-packages b/stage2/01-sys-tweaks/00-packages
+index f06f7d0..deffb90 100644
+--- a/stage2/01-sys-tweaks/00-packages
++++ b/stage2/01-sys-tweaks/00-packages
+@@ -1,39 +1,25 @@
+ ssh less fbset sudo psmisc strace ed ncdu
+ console-setup keyboard-configuration debconf-utils parted
+-build-essential manpages-dev bash-completion gdb pkg-config
+-python-is-python3
+-v4l-utils
+-gpiod python3-libgpiod
+-python3-gpiozero
+-pigpio python3-pigpio raspi-gpio python3-rpi-lgpio
+-python3-spidev
+-python3-smbus2
++bash-completion
++gpiod
++pigpio raspi-gpio
+ avahi-daemon
+-lua5.1
+-luajit
+ ca-certificates curl
+-fake-hwclock nfs-common usbutils
++fake-hwclock
++usbutils
+ dosfstools
+-dphys-swapfile
+ raspberrypi-sys-mods
+ pi-bluetooth
+ apt-listchanges
+ usb-modeswitch
+ libpam-chksshpwd
+-rpi-update
+-libmtp-runtime
+-rsync
+ htop
+-man-db
+ policykit-1
+ ssh-import-id
+ ethtool
+-ntfs-3g
+ pciutils
+ rpi-eeprom
+ raspi-utils
+-udisks2
+ unzip zip p7zip-full
+ file
+ kms++-utils
+-python3-venv
+diff --git a/stage2/01-sys-tweaks/00-packages-nr b/stage2/01-sys-tweaks/00-packages-nr
+index 15c0f66..e69de29 100644
+--- a/stage2/01-sys-tweaks/00-packages-nr
++++ b/stage2/01-sys-tweaks/00-packages-nr
+@@ -1,3 +0,0 @@
+-cifs-utils
+-rpicam-apps-lite
+-mkvtoolnix
+diff --git a/stage2/01-sys-tweaks/00-patches/series b/stage2/01-sys-tweaks/00-patches/series
+index aee0402..c5d8e4b 100644
+--- a/stage2/01-sys-tweaks/00-patches/series
++++ b/stage2/01-sys-tweaks/00-patches/series
+@@ -1,5 +1,4 @@
+ 01-useradd.diff
+-02-swap.diff
+ 04-inputrc.diff
+ 05-path.diff
+ 07-resize-init.diff

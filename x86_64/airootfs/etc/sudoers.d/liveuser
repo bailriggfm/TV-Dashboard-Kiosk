@@ -1,0 +1,3 @@
+%wheel ALL=(ALL:ALL) ALL
+
+%wheel ALL=(ALL) NOPASSWD: /opt/scripts/next-boot-os.sh
