@@ -30,6 +30,7 @@ Environment="XKB_DEFAULT_MODEL=pc105"
 Environment="XKB_DEFAULT_LAYOUT=gb"
 Environment="XKB_DEFAULT_VARIANT="
 Environment="XKB_DEFAULT_OPTIONS="
+Environment="MOZ_ENABLE_WAYLAND=1"
 ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://google.com"
 Restart=always
 User=<user>
