@@ -77,6 +77,11 @@
       "SiteSettings": true,
       "Locked": true
     },
+    "WebsiteFilter": {
+      "Block": [
+        "about:logins"
+      ]
+    },
     "SearchSuggestEnabled": false,
     "ShowHomeButton": false,
     "SkipTermsOfUse": true,
