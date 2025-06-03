@@ -62,8 +62,8 @@ case $BUILD_CHOICE in
         git -C "$BASE_DIR/RPI/pi-gen" checkout arm64
         cp -r "$BASE_DIR/RPI/." "$CONFIG_DIR"
         cp -r "$BASE_DIR/airootfs-shared/." "$CONFIG_DIR/airootfs/"
-        "$BASE_DIR/RPI/build-RPI.sh"
         git -C "$BASE_DIR/RPI/pi-gen" checkout master
+        "$BASE_DIR/RPI/build-RPI.sh"
         ;;
       *)
         echo "Invalid choice. Exiting."
