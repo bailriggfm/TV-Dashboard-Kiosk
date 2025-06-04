@@ -7,6 +7,7 @@ export USERNAME="live"
 export USERPASSWORD="liveuser"
 
 # Package to install for the caged application
+# i.e. firefox, chromium, etc. - For older Raspberry Pis chromium is recommended. :(
 export CAGED_APP="firefox"
 
 # Cage service configuration
