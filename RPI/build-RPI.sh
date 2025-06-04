@@ -54,6 +54,7 @@ dialog
 wlr-randr
 xwayland
 alsa-utils
+pulseaudio-utils
 pipewire
 wireplumber
 pipewire-alsa
