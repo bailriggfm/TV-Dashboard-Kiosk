@@ -81,5 +81,5 @@ htop
 fastfetch
 #ffmpeg
 
-# Our caged Application
-firefox
+# Our caged app will be added to this file when the build script is run.
+# This is defined via CAGED_APP variable in config.sh

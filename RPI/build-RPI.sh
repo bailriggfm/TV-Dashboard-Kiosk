@@ -57,7 +57,7 @@ pipewire-pulse
 pipewire-jack
 pipewire-audio
 pipewire-v4l2
-firefox
+$CAGED_APP
 overlayroot
 EOF
 

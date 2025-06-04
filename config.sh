@@ -6,6 +6,9 @@
 export USERNAME="live"
 export USERPASSWORD="liveuser"
 
+# Package to install for the caged application
+export CAGED_APP="firefox"
+
 # Cage service configuration
 # Please note that some characters may need to be escaped to work with sed.
 # Such as &. If you want an & you must put \&
