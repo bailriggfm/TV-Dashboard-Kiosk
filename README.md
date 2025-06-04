@@ -62,4 +62,9 @@ By default both the x86_64 and the RPI images are configured to be read-only onc
 
 Because of this remote connection features of the images are disabled, you should use a secure user password and you are encouraged to regularly rebuild the images to update them.
 
-On the x86_64 images it is not possible to disable this functionality due to the nature of the way the image is built. For the RPI images this can be disabled by editing the `RPI/files/overlay-root.sh` script.
+On the x86_64 images it is not possible to disable this functionality due to the nature of the way the image is built (using squashfs where the entire os is loaded into memory). For the RPI images this can be disabled by editing the `RPI/files/overlay-root.sh` script.
+
+Because x86_64 images are loaded into memory before booting them this does allow the boot medium to be removed, however the system will not be able to reboot into the image due to a lack of boot media. This does not apply to the RPI images, boot media must remain within the device while the os is booted.
+
+> [!NOTE]
+> Theoretically x86_64 images could have persistance enabled on them with the help of overlayfs, similarly to how the RPI is made readonly, where data could be written to a persistance partition outside of the image however this is untested.
