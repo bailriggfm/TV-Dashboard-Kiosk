@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Early init script to remount root fs as overlay
-# This script runs via systemd before local-fs.target
+# Early init script to disable the RW on root fs.
 
 set -e
 

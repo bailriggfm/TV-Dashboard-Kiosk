@@ -42,6 +42,8 @@ The default sudo password for the user is liveuser. If you need to keep the syst
 
 By default the localtime is set to Europe/London. For x86_64 This can be updated by updating the symlink for `airootfs/etc/localtime`
 
+On the RPI build the PIs touchscreen is disabled to hide the mouse cursor when no mouse is connected. If you need the touchscreen feature please remove this service from `RPI/build-RPI.sh`
+
 ### Firefox restrictions
 
 Firefox is configured on all users with a custom default firefox profile. This profile enables autoplay of media, disables first-run behaviours, disables all telemetry and sets the theme to a dark theme. This is useful for the kiosk that may not have user interaction but have autoplay of media. For safety we also specify the profile when we start firefox.
