@@ -15,7 +15,7 @@ export CAGED_APP="firefox"
 # Such as &. If you want an & you must put \&
 #export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/office?pass=primary"'
 export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/studio-a"'
-export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/player"'
+#export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/player"'
 
 # Option if using chromium instead of firefox
 #export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/chromium --kiosk "https://screen.bailriggfm.co.uk/view/office?pass=primary" --noerrdialogs --disable-infobars --incognito --start-fullscreen --autoplay-policy=no-user-gesture-required --disable-session-crashed-bubble --no-proxy-server --no-first-run'
