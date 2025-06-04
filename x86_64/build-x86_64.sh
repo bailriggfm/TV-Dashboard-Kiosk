@@ -8,6 +8,12 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Replace line
+echo "🔧 Patching packages.x86_64..."
+cat <<EOF >> $CONFIG_DIR/packages.x86_64
+# Our caged Application
+$CAGED_APP
+EOF
+
 echo "🔧 Patching Cage Service..."
 sed -i "s|^ExecStart=.*|$CAGEEXECSTART_LINE|" "$CAGE_SERVICE_PATH"
 sed -i "s/^User=<user>/User=$USERNAME/" "$CAGE_SERVICE_PATH"
