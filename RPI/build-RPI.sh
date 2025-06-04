@@ -36,8 +36,12 @@ chmod -R 755 "\${ROOTFS_DIR}/opt/scripts"
 install -m 755 "/pi-gen/files/overlay-root.sh" "\${ROOTFS_DIR}/opt/scripts/"
 install -m 644 "/pi-gen/files/overlay-root.service" "\${ROOTFS_DIR}/etc/systemd/system/"
 
+install -m 755 "/pi-gen/files/disable-touchscreen.sh" "\${ROOTFS_DIR}/opt/scripts/"
+install -m 644 "/pi-gen/files/disable-touchscreen.service" "\${ROOTFS_DIR}/etc/systemd/system/"
+
 on_chroot <<END
   systemctl enable overlay-root.service
+  systemctl enable disable-touchscreen.service
 END
 
 EOF
