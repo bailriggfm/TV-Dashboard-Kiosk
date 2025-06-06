@@ -3,25 +3,27 @@
 # Shared config
 
 # Username & Password for the live user
-export USERNAME="live"
-export USERPASSWORD="liveuser"
+export USERNAME='live'
+export USERPASSWORD='liveuser'
 
-# Package to install for the caged application
-# i.e. firefox, chromium, etc. - For older Raspberry Pis chromium is recommended. :(
-export CAGED_APP="firefox"
+# Configuration matrix for applications using arrays
+# Each entry is an array with format: [display_name build_type CagedPackage exec_command]
+# Build types can be 'x86_64', 'RPI64' or 'RPI32' or 'RPI' for an RPI build
+declare -a FIREFOX_X86_64=('Firefox on x86_64' 'x86_64' 'firefox' 'ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://google.com"')
+declare -a CHROMIUM_RPI=('Chromium on RPI' 'RPI64' 'chromium' 'ExecStart=/usr/bin/cage -s -- /usr/bin/chromium --kiosk "https://google.com" --noerrdialogs --disable-infobars --incognito --start-fullscreen --autoplay-policy=no-user-gesture-required --disable-session-crashed-bubble --no-proxy-server --no-first-run')
+declare -a CHROMIUM_X86_64=('Chromium on x86_64' 'x86_64' 'chromium' 'ExecStart=/usr/bin/cage -s -- /usr/bin/chromium --kiosk "https://google.com" --noerrdialogs --disable-infobars --incognito --start-fullscreen --autoplay-policy=no-user-gesture-required --disable-session-crashed-bubble --no-proxy-server --no-first-run')
+declare -a FIREFOX_RPI=('Firefox on RPI' 'RPI64' 'firefox' 'ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://google.com"')
 
-# Cage service configuration
-# Please note that some characters may need to be escaped to work with sed.
-# Such as &. If you want an & you must put \&
-export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://google.com"'
+# Main configuration array that includes all configurations
+declare -a CONFIG_MATRIX=(FIREFOX_X86_64 FIREFOX_RPI CHROMIUM_X86_64 CHROMIUM_RPI)
 
-# Option if using chromium instead of firefox
-#export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/chromium --kiosk "https://google.com" --noerrdialogs --disable-infobars --incognito --start-fullscreen --autoplay-policy=no-user-gesture-required --disable-session-crashed-bubble --no-proxy-server --no-first-run'
-
-# x86_64 CONFIG
+# These variables will be set by the build script based on user selection
+export BUILD_TYPE=''
+export CAGED_APP=''
+export CAGEEXECSTART_LINE=''
 
 # RPI CONFIG
-export RPI_IMG_NAME='SimpleLinuxKiosk-RPI'
+export RPI_IMG_NAME="SimpleLinuxKiosk-RPI-$(openssl rand -base64 4 | tr -dc 'a-zA-Z0-9' | head -c 5)"
 export RPI_PI_GEN_RELEASE='Simple Linux Kiosk - Raspberry Pi Version'
 export RPI_DEPLOY_COMPRESSION='xz'
 export RPI_COMPRESSION_LEVEL='9'

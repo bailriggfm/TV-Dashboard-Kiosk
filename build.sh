@@ -34,46 +34,86 @@ cd "$BASE_DIR"
 
 source "$BASE_DIR/config.sh"
 
-# Prompt the user to select the build type
-echo "Which image would you like to build?"
-echo "1) x86_64"
-echo "2) RPI"
-read -p "Enter the number of your choice: " BUILD_CHOICE
+# Function to display all configuration options and get user selection
+select_configuration() {
+  echo "Please select a configuration:"
+  local i=1
+  local valid_configs=()
 
-case $BUILD_CHOICE in
-  1)
-    echo "Building x86_64 image..."
-    cp -r "$BASE_DIR/x86_64/." "$CONFIG_DIR"
-    cp -r "$BASE_DIR/airootfs-shared/." "$CONFIG_DIR/airootfs/"
-    "$BASE_DIR/x86_64/build-x86_64.sh"
-    ;;
-  2)
-    echo "Building RPI image..."
-    read -p "Would you like to build a 32-bit or 64-bit RPI image? (32/64): " RPI_ARCH
-    case $RPI_ARCH in
-      32)
-        echo "Building 32-bit RPI image..."
-        cp -r "$BASE_DIR/RPI/." "$CONFIG_DIR"
-        cp -r "$BASE_DIR/airootfs-shared/." "$CONFIG_DIR/airootfs/"
-        "$BASE_DIR/RPI/build-RPI.sh"
-        ;;
-      64)
-        echo "Building 64-bit RPI image..."
-        git -C "$BASE_DIR/RPI/pi-gen" checkout arm64
-        cp -r "$BASE_DIR/RPI/." "$CONFIG_DIR"
-        cp -r "$BASE_DIR/airootfs-shared/." "$CONFIG_DIR/airootfs/"
-        git -C "$BASE_DIR/RPI/pi-gen" checkout master
-        "$BASE_DIR/RPI/build-RPI.sh"
-        ;;
-      *)
-        echo "Invalid choice. Exiting."
-        exit 1
-        ;;
-    esac
-    ;;
-  *)
+  # Display all configurations
+  for config_name in "${CONFIG_MATRIX[@]}"; do
+    # Get array values properly preserving spaces
+    eval "local name=\${$config_name[0]}"
+    eval "local build_type=\${$config_name[1]}"
+    eval "local app=\${$config_name[2]}"
+    eval "local exec_cmd=\${$config_name[3]}"
+
+    echo "$i) $name"
+    valid_configs+=("$config_name")
+    ((i++))
+  done
+
+  read -p "Enter the number of your choice: " CONFIG_CHOICE
+
+  if [[ "$CONFIG_CHOICE" -lt 1 || "$CONFIG_CHOICE" -gt ${#valid_configs[@]} ]]; then
     echo "Invalid choice. Exiting."
     exit 1
-    ;;
-esac
+  fi
+
+  # Set the selected configuration
+  selected_config="${valid_configs[$CONFIG_CHOICE-1]}"
+
+  # Get array values properly preserving spaces
+  eval "export BUILD_TYPE=\${$selected_config[1]}"
+  eval "export CAGED_APP=\${$selected_config[2]}"
+  eval "export CAGEEXECSTART_LINE=\${$selected_config[3]}"
+  eval "local name=\${$selected_config[0]}"
+
+  echo "Selected configuration: $name"
+}
+
+# Select configuration directly
+select_configuration
+
+# Process the build based on the selected configuration
+if [[ "$BUILD_TYPE" == "x86_64" ]]; then
+  echo "Building x86_64 image with $CAGED_APP..."
+  cp -r "$BASE_DIR/x86_64/." "$CONFIG_DIR"
+  cp -r "$BASE_DIR/airootfs-shared/." "$CONFIG_DIR/airootfs/"
+  "$BASE_DIR/x86_64/build-x86_64.sh"
+elif [[ "$BUILD_TYPE" == "RPI" || "$BUILD_TYPE" == "RPI32" || "$BUILD_TYPE" == "RPI64"   ]]; then
+  # Extract bit architecture from the configuration name
+  if [[ "${BUILD_TYPE}" == *"RPI32"* ]]; then
+    RPI_ARCH="32"
+  elif [[ "${BUILD_TYPE}" == *"RPI64"* ]]; then
+    RPI_ARCH="64"
+  else
+    # If not specified in name, ask the user
+    read -p "Would you like to build a 32-bit or 64-bit RPI image? (32/64): " RPI_ARCH
+  fi
+
+  case $RPI_ARCH in
+    32)
+      echo "Building 32-bit RPI image with $CAGED_APP..."
+      cp -r "$BASE_DIR/RPI/." "$CONFIG_DIR"
+      cp -r "$BASE_DIR/airootfs-shared/." "$CONFIG_DIR/airootfs/"
+      "$BASE_DIR/RPI/build-RPI.sh"
+      ;;
+    64)
+      echo "Building 64-bit RPI image with $CAGED_APP..."
+      git -C "$BASE_DIR/RPI/pi-gen" checkout arm64
+      cp -r "$BASE_DIR/RPI/." "$CONFIG_DIR"
+      cp -r "$BASE_DIR/airootfs-shared/." "$CONFIG_DIR/airootfs/"
+      git -C "$BASE_DIR/RPI/pi-gen" checkout master
+      "$BASE_DIR/RPI/build-RPI.sh"
+      ;;
+    *)
+      echo "Invalid choice. Exiting."
+      exit 1
+      ;;
+  esac
+else
+  echo "Unknown build type: $BUILD_TYPE. Exiting."
+  exit 1
+fi
 
