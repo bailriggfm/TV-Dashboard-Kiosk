@@ -3,29 +3,29 @@
 # Shared config
 
 # Username & Password for the live user
-export USERNAME="live"
-export USERPASSWORD="liveuser"
+export USERNAME='live'
+export USERPASSWORD='liveuser'
 
-# Package to install for the caged application
-# i.e. firefox, chromium, etc. - For older Raspberry Pis chromium is recommended. :(
-export CAGED_APP="firefox"
+# Configuration matrix for applications using arrays
+# Each entry is an array with format: [display_name build_type CagedPackage exec_command]
+# Build types can be 'x86_64', 'RPI64' or 'RPI32' or 'RPI' for an RPI build
+declare -a FIREFOX_X86_64_OFFICE=('Firefox on x86_64 - Office' 'x86_64' 'firefox' 'ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/office?pass=primary"')
+declare -a FIREFOX_X86_64_STUDIOA=('Firefox on x86_64 - Studio A' 'x86_64' 'firefox' 'ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/studio-a"')
+declare -a FIREFOX_X86_64_PLAYER=('Firefox on x86_64 - Player' 'x86_64' 'firefox' 'ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/player"')
+declare -a CHROMIUM_RPI_OFFICE=('Chromium on RPI - Office' 'RPI64' 'chromium' 'ExecStart=/usr/bin/cage -s -- /usr/bin/chromium --kiosk "https://screen.bailriggfm.co.uk/view/office?pass=primary" --noerrdialogs --disable-infobars --incognito --start-fullscreen --autoplay-policy=no-user-gesture-required --disable-session-crashed-bubble --no-proxy-server --no-first-run')
+declare -a CHROMIUM_RPI_STUDIOA=('Chromium on RPI - Studio A' 'RPI64' 'chromium' 'ExecStart=/usr/bin/cage -s -- /usr/bin/chromium --kiosk "https://screen.bailriggfm.co.uk/view/studio-a" --noerrdialogs --disable-infobars --incognito --start-fullscreen --autoplay-policy=no-user-gesture-required --disable-session-crashed-bubble --no-proxy-server --no-first-run')
+declare -a CHROMIUM_RPI_PLAYER=('Chromium on RPI - Player' 'RPI64' 'chromium' 'ExecStart=/usr/bin/cage -s -- /usr/bin/chromium --kiosk "https://screen.bailriggfm.co.uk/view/player" --noerrdialogs --disable-infobars --incognito --start-fullscreen --autoplay-policy=no-user-gesture-required --disable-session-crashed-bubble --no-proxy-server --no-first-run')
 
-# Cage service configuration
-# Please note that some characters may need to be escaped to work with sed.
-# Such as &. If you want an & you must put \&
-#export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/office?pass=primary"'
-export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/studio-a"'
-#export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/player"'
+# Main configuration array that includes all configurations
+declare -a CONFIG_MATRIX=(FIREFOX_X86_64_OFFICE FIREFOX_X86_64_STUDIOA FIREFOX_X86_64_PLAYER CHROMIUM_RPI_OFFICE CHROMIUM_RPI_STUDIOA CHROMIUM_RPI_PLAYER)
 
-# Option if using chromium instead of firefox
-#export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/chromium --kiosk "https://screen.bailriggfm.co.uk/view/office?pass=primary" --noerrdialogs --disable-infobars --incognito --start-fullscreen --autoplay-policy=no-user-gesture-required --disable-session-crashed-bubble --no-proxy-server --no-first-run'
-#export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/chromium --kiosk "https://screen.bailriggfm.co.uk/view/studio-a" --noerrdialogs --disable-infobars --incognito --start-fullscreen --autoplay-policy=no-user-gesture-required --disable-session-crashed-bubble --no-proxy-server --no-first-run'
-#export CAGEEXECSTART_LINE='ExecStart=/usr/bin/cage -s -- /usr/bin/chromium --kiosk "https://screen.bailriggfm.co.uk/view/player" --noerrdialogs --disable-infobars --incognito --start-fullscreen --autoplay-policy=no-user-gesture-required --disable-session-crashed-bubble --no-proxy-server --no-first-run'
-
-# x86_64 CONFIG
+# These variables will be set by the build script based on user selection
+export BUILD_TYPE=''
+export CAGED_APP=''
+export CAGEEXECSTART_LINE=''
 
 # RPI CONFIG
-export RPI_IMG_NAME='SimpleLinuxKiosk-RPI'
+export RPI_IMG_NAME="SimpleLinuxKiosk-RPI-$(openssl rand -base64 4 | tr -dc 'a-zA-Z0-9' | head -c 5)"
 export RPI_PI_GEN_RELEASE='Simple Linux Kiosk - Raspberry Pi Version'
 export RPI_DEPLOY_COMPRESSION='xz'
 export RPI_COMPRESSION_LEVEL='9'

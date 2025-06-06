@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-iso_name="SimpleLinuxKiosk"
+iso_name="SimpleLinuxKiosk-$(openssl rand -base64 4 | tr -dc 'a-zA-Z0-9' | head -c 5)"
 iso_label="LINUX_KIOSK_$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%y%m)"
 iso_publisher="Ava Glass"
 iso_application="Simple Linux Kiosk"

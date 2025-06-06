@@ -19,18 +19,21 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Build Kiosk using docker.
-        run: |
-          docker run --privileged --rm -v $PWD:/work -w /work archlinux:latest /bin/bash -c "
-            pacman -Sy --noconfirm archlinux-keyring archiso edk2-ovmf gnupg grub openssl
-            cd /work && ./build.sh <<< "1"
-          "
+      - name: Build Kiosk x86_64.
+        run: sudo ./build.sh <<< "1"
+
+      - name: Build Kiosk RPI.
+        run: sudo ./build.sh <<< "5"
+
+      - name: Build Kiosk RPI.
+        run: sudo ./build.sh <<< "6"
+
       - name: Upload built ISO
         uses: actions/upload-artifact@v4
         with:
           # Name of the artifact to upload.
           # Optional. Default is 'artifact'
           name: Built Test ISO
-          path: build/*.iso
+          path: build/iso/*
           retention-days: 1
           compression-level: 0
