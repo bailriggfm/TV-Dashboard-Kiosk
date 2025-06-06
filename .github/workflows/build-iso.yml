@@ -5,14 +5,14 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# Allow one concurrent deployment
+# Allow concurrent builds for different architectures
 concurrency:
-  group: "build-kiosk"
+  group: "build-kiosk-${{ github.ref }}"
   cancel-in-progress: false
 
 jobs:
-  build-kiosk:
-    name: Build Kiosk ISO
+  build-kiosk-x86_64-Office:
+    name: Build Kiosk ISO (x86_64) - Office
     runs-on: ubuntu-latest
 
     steps:
@@ -27,21 +27,67 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qemu-user-static
 
-      - name: Build Kiosk x86_64 - Office.
+      - name: Build Kiosk x86_64
         run: sudo ./build.sh <<< "1"
 
-      - name: Build Kiosk RPI - Studio A.
-        run: sudo ./build.sh <<< "5"
-
-      - name: Build Kiosk RPI - Player.
-        run: sudo ./build.sh <<< "6"
-
-      - name: Upload built ISO
+      - name: Upload x86_64 ISO
         uses: actions/upload-artifact@v4
         with:
-          # Name of the artifact to upload.
-          # Optional. Default is 'artifact'
-          name: Built Test ISO
+          name: Built-ISO-x86_64-Office
           path: build/iso/*
-          retention-days: 1
+          retention-days: 10
+          compression-level: 0
+
+  build-kiosk-rpi-studio-a:
+    name: Build Kiosk ISO (RPI) - Studio A
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for all branches and tags
+          submodules: "recursive" # Fetch submodules recursively
+
+      - name: Set up QEMU
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static
+
+      - name: Build Kiosk RPI
+        run: sudo ./build.sh <<< "5"
+
+      - name: Upload RPI IMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: Built-IMG-RPI-Studio-A
+          path: build/iso/*
+          retention-days: 10
+          compression-level: 0
+
+  build-kiosk-rpi-player:
+    name: Build Kiosk ISO (RPI) - Player
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for all branches and tags
+          submodules: "recursive" # Fetch submodules recursively
+
+      - name: Set up QEMU
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static
+
+      - name: Build Kiosk RPI
+        run: sudo ./build.sh <<< "6"
+
+      - name: Upload RPI IMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: Built-IMG-RPI-Player
+          path: build/iso/*
+          retention-days: 10
           compression-level: 0
