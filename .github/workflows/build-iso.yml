@@ -27,13 +27,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qemu-user-static
 
-      - name: Build Kiosk x86_64.
+      - name: Build Kiosk x86_64 - Office.
         run: sudo ./build.sh <<< "1"
 
-      - name: Build Kiosk RPI.
+      - name: Build Kiosk RPI - Studio A.
         run: sudo ./build.sh <<< "5"
 
-      - name: Build Kiosk RPI.
+      - name: Build Kiosk RPI - Player.
         run: sudo ./build.sh <<< "6"
 
       - name: Upload built ISO
