@@ -1,0 +1,11 @@
+NAME="Simple Linux Kiosk"
+PRETTY_NAME="Simple Linux Kiosk"
+ID=arch
+BUILD_ID=rolling
+ANSI_COLOR="38;2;23;147;209"
+HOME_URL="https://github.com/SuperNinja-4965/Simple-Linux-Kiosk/"
+DOCUMENTATION_URL="https://github.com/SuperNinja-4965/Simple-Linux-Kiosk/"
+SUPPORT_URL="https://github.com/SuperNinja-4965/Simple-Linux-Kiosk/issues"
+BUG_REPORT_URL="https://github.com/SuperNinja-4965/Simple-Linux-Kiosk/issues"
+PRIVACY_POLICY_URL=""
+LOGO=
