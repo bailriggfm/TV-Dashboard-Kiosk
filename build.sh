@@ -101,10 +101,10 @@ elif [[ "$BUILD_TYPE" == "RPI" || "$BUILD_TYPE" == "RPI32" || "$BUILD_TYPE" == "
       ;;
     64)
       echo "Building 64-bit RPI image with $CAGED_APP..."
-      git -C "$BASE_DIR/RPI/pi-gen" checkout arm64
+      git -C "$BASE_DIR/RPI/pi-gen" checkout bookworm-arm64
       cp -r "$BASE_DIR/RPI/." "$CONFIG_DIR"
       cp -r "$BASE_DIR/airootfs-shared/." "$CONFIG_DIR/airootfs/"
-      git -C "$BASE_DIR/RPI/pi-gen" checkout master
+      git -C "$BASE_DIR/RPI/pi-gen" checkout bookworm
       "$BASE_DIR/RPI/build-RPI.sh"
       ;;
     *)
