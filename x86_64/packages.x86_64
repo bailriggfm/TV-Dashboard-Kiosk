@@ -19,6 +19,9 @@ grep
 # Linux extras
 linux-headers
 linux-firmware
+linux-firmware-qcom
+linux-firmware-qlogic
+linux-firmware-marvell
 intel-ucode
 amd-ucode
 
@@ -30,6 +33,8 @@ amd-ucode
 #nvidia-utils
 mesa
 lib32-mesa
+libva-intel-driver
+intel-media-driver
 
 # For a pretty boot screen
 plymouth
