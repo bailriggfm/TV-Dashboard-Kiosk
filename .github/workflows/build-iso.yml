@@ -91,3 +91,31 @@ jobs:
           path: build/iso/*
           retention-days: 10
           compression-level: 0
+
+
+  build-kiosk-rpi-office:
+    name: Build Kiosk ISO (RPI) - Office
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for all branches and tags
+          submodules: "recursive" # Fetch submodules recursively
+
+      - name: Set up QEMU
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static
+
+      - name: Build Kiosk RPI
+        run: sudo ./build.sh <<< "4"
+
+      - name: Upload RPI IMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: Built-IMG-RPI-Player
+          path: build/iso/*
+          retention-days: 10
+          compression-level: 0
