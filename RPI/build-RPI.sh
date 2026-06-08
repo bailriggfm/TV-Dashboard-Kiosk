@@ -20,6 +20,9 @@ sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY3_SERVICE"
 
 echo "🔧 Patching Stages..."
 patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/01-sys-tweaks-packages-patch.patch"
+if [ "${CI:-false}" != "true" ]; then
+    patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/patch-build-docker-ci.patch"
+fi
 
 echo "🔧 Creating our own step..."
 mkdir -p "$RPIGEN/stage2/99-kiosk-config"
@@ -102,9 +105,6 @@ mv "$CONFIG_DIR/airootfs" "$CONFIG_DIR/pi-gen/airootfs"
 mv "$CONFIG_DIR/files" "$CONFIG_DIR/pi-gen/"
 
 echo "▶️ Building Image..."
-if [ "${CI:-false}" != "true" ]; then
-    patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/patch-build-docker-ci.patch"
-fi
 cd "$CONFIG_DIR/pi-gen"
 ./build-docker.sh
 
