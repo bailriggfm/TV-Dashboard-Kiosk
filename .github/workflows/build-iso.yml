@@ -55,7 +55,7 @@ jobs:
           sudo apt-get install -y qemu-user-static binfmt-support
 
       - name: Build Kiosk RPI
-        run: sudo ./build.sh <<< "2"
+        run: env CI=true sudo ./build.sh <<< "2"
 
       - name: Upload RPI IMG
         uses: actions/upload-artifact@v4
