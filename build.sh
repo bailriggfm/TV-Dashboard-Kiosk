@@ -95,16 +95,17 @@ elif [[ "$BUILD_TYPE" == "RPI" || "$BUILD_TYPE" == "RPI32" || "$BUILD_TYPE" == "
   case $RPI_ARCH in
     32)
       echo "Building 32-bit RPI image with $CAGED_APP..."
+      git -C "$BASE_DIR/RPI/pi-gen" checkout 2026-04-13-raspios-trixie-armhf
       cp -r "$BASE_DIR/RPI/." "$CONFIG_DIR"
       cp -r "$BASE_DIR/airootfs-shared/." "$CONFIG_DIR/airootfs/"
       "$BASE_DIR/RPI/build-RPI.sh"
       ;;
     64)
       echo "Building 64-bit RPI image with $CAGED_APP..."
-      git -C "$BASE_DIR/RPI/pi-gen" checkout 2025-10-01-raspios-bookworm-arm64
+      git -C "$BASE_DIR/RPI/pi-gen" checkout 2026-04-13-raspios-trixie-arm64
       cp -r "$BASE_DIR/RPI/." "$CONFIG_DIR"
       cp -r "$BASE_DIR/airootfs-shared/." "$CONFIG_DIR/airootfs/"
-      git -C "$BASE_DIR/RPI/pi-gen" checkout 2025-10-01-raspios-bookworm-armhf
+      git -C "$BASE_DIR/RPI/pi-gen" checkout 2026-04-13-raspios-trixie-armhf
       "$BASE_DIR/RPI/build-RPI.sh"
       ;;
     *)
