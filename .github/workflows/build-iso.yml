@@ -23,9 +23,7 @@ jobs:
           submodules: "recursive" # Fetch submodules recursively
 
       - name: Set up QEMU
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y qemu-user-static binfmt-support
+        uses: docker/setup-qemu-action@v4
 
       - name: Build Kiosk x86_64
         run: env CI=true sudo ./build.sh <<< "1"
@@ -50,9 +48,7 @@ jobs:
           submodules: "recursive" # Fetch submodules recursively
 
       - name: Set up QEMU
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y qemu-user-static binfmt-support
+        uses: docker/setup-qemu-action@v4
 
       - name: Build Kiosk RPI
         run: env CI=true sudo ./build.sh <<< "5"
