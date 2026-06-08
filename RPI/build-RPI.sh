@@ -102,6 +102,9 @@ mv "$CONFIG_DIR/airootfs" "$CONFIG_DIR/pi-gen/airootfs"
 mv "$CONFIG_DIR/files" "$CONFIG_DIR/pi-gen/"
 
 echo "▶️ Building Image..."
+if [ "${CI:-false}" != "true" ]; then
+    patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/patch-build-docker-ci.patch"
+fi
 cd "$CONFIG_DIR/pi-gen"
 ./build-docker.sh
 
