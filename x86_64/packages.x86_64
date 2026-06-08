@@ -47,7 +47,6 @@ efibootmgr
 networkmanager
 firewalld
 ntp
-broadcom-wl
 iw
 iwd
 inetutils
