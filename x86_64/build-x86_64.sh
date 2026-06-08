@@ -60,7 +60,7 @@ mkdir -p "$CACHE_DIR/pacman"
 
 # Build ISO in Docker
 echo "▶️ Building ISO..."
-if ! docker run --privileged \
+if ! docker run -it --privileged \
                 --rm \
                 -v "$BUILD_TMP":/build \
                 -v "$ISO_DIR":/iso \

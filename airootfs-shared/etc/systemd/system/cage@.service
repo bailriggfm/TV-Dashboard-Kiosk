@@ -31,6 +31,8 @@ Environment="XKB_DEFAULT_LAYOUT=gb"
 Environment="XKB_DEFAULT_VARIANT="
 Environment="XKB_DEFAULT_OPTIONS="
 Environment="MOZ_ENABLE_WAYLAND=1"
+Environment="WLR_DRM_NO_ATOMIC=1"
+Environment="LIBSEAT_BACKEND=logind"
 ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://google.com"
 Restart=always
 User=<user>
