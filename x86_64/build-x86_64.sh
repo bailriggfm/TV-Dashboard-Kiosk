@@ -60,7 +60,12 @@ mkdir -p "$CACHE_DIR/pacman"
 
 # Build ISO in Docker
 echo "▶️ Building ISO..."
-if ! docker run -it --privileged \
+DOCKER_RUN_ARGS=(--privileged)
+if [ "${CI:-false}" != "true" ]; then
+    DOCKER_RUN_ARGS+=(-it)
+fi
+
+if ! docker run "${DOCKER_RUN_ARGS[@]}" \
                 --rm \
                 -v "$BUILD_TMP":/build \
                 -v "$ISO_DIR":/iso \
