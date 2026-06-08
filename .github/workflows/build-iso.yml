@@ -115,7 +115,7 @@ jobs:
       - name: Upload RPI IMG
         uses: actions/upload-artifact@v4
         with:
-          name: Built-IMG-RPI-Player
+          name: Built-IMG-RPI-Office
           path: build/iso/*
           retention-days: 10
           compression-level: 0
