@@ -28,7 +28,7 @@ jobs:
           sudo apt-get install -y qemu-user-static binfmt-support
 
       - name: Build Kiosk x86_64
-        run: sudo ./build.sh <<< "1"
+        run: env CI=true sudo ./build.sh <<< "1"
 
       - name: Upload x86_64 ISO
         uses: actions/upload-artifact@v4
@@ -55,7 +55,7 @@ jobs:
           sudo apt-get install -y qemu-user-static binfmt-support
 
       - name: Build Kiosk RPI
-        run: sudo ./build.sh <<< "5"
+        run: env CI=true sudo ./build.sh <<< "5"
 
       - name: Upload RPI IMG
         uses: actions/upload-artifact@v4
@@ -82,7 +82,7 @@ jobs:
           sudo apt-get install -y qemu-user-static
 
       - name: Build Kiosk RPI
-        run: sudo ./build.sh <<< "6"
+        run: env CI=true sudo ./build.sh <<< "6"
 
       - name: Upload RPI IMG
         uses: actions/upload-artifact@v4
@@ -110,7 +110,7 @@ jobs:
           sudo apt-get install -y qemu-user-static
 
       - name: Build Kiosk RPI
-        run: sudo ./build.sh <<< "4"
+        run: env CI=true sudo ./build.sh <<< "4"
 
       - name: Upload RPI IMG
         uses: actions/upload-artifact@v4
