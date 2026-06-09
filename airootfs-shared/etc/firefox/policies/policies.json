@@ -11,6 +11,7 @@
     "BlockAboutProfiles": true,
     "OfferToSaveLogins": false,
     "OfferToSaveLoginsDefault": false,
+    "DefaultSerialGuardSetting": 3,
     "DisableFirefoxAccounts": true,
     "DisableFirefoxScreenshots": true,
     "DisableFirefoxStudies": true,
@@ -52,6 +53,9 @@
       "SponsoredSuggestions": false,
       "ImproveSuggest": false,
       "Locked": true
+    },
+    "GenerativeAI": {
+      "Enabled": false
     },
     "GoToIntranetSiteForSingleWordEntryInAddressBar": true,
     "HardwareAcceleration": true,
