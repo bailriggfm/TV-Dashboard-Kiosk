@@ -65,14 +65,17 @@ if [ "${CI:-false}" != "false" ]; then
     DOCKER_RUN_ARGS+=(-it)
 fi
 
+export ISO_NAME_PRE="SimpleLinuxKiosk-$(openssl rand -base64 4 | tr -dc 'a-zA-Z0-9' | head -c 5)"
+
 if ! docker run "${DOCKER_RUN_ARGS[@]}" \
                 --rm \
+                -e ISO_NAME_PRE="$ISO_NAME_PRE" \
                 -v "$BUILD_TMP":/build \
                 -v "$ISO_DIR":/iso \
                 -v "$CACHE_DIR/pacman":/pacman \
                 -w /build archlinux:latest \
                 /bin/bash -c '
-                pacman -Sy --noconfirm archlinux-keyring archiso edk2-ovmf gnupg grub openssl || {
+                pacman -Sy --noconfirm archlinux-keyring archiso edk2-ovmf gnupg grub openssl libisoburn sbsigntools rpmextract cpio mtools || {
                     echo "❌ Failed to install required packages with pacman.";
                     exit 1;
                 }
@@ -82,6 +85,15 @@ if ! docker run "${DOCKER_RUN_ARGS[@]}" \
 
   echo "❌ mkarchiso failed."
   exit 1
+fi
+
+if [ "${USE_SECUREBOOT:-N}" != "N" ]; then
+    echo "Injecting Secure Boot Shim into ISO..."
+    if ! "$$BASE_DIR/x86_64/secureboot/inject-secureboot.sh" inject --in "$ISO_DIR/$ISO_NAME_PRE.iso" --out "$ISO_DIR/$ISO_NAME_PRE-secureboot.iso" --key "$SECUREBOOT_MOK_KEY" --cer "$SECUREBOOT_MOK_CER" --crt "$SECUREBOOT_MOK_CRT"; then
+        echo "❌ Failed to inject Secure Boot Shim into ISO."
+        exit 1
+    fi
+    rm "$ISO_DIR/$ISO_NAME_PRE.iso"
 fi
 
 echo "✅ Done! ISO built."
