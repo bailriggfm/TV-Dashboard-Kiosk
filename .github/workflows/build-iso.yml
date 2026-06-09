@@ -22,12 +22,27 @@ jobs:
           fetch-depth: 0 # Fetch all history for all branches and tags
           submodules: "recursive" # Fetch submodules recursively
 
-      - name: Set up QEMU
+      - name: Set up QEMU (binfmt)
         run: |
           sudo apt-get update
-          sudo apt-get install -y qemu-user-static binfmt-support
-          sudo update-binfmts --enable qemu-arm || true
-          sudo update-binfmts --enable qemu-aarch64 || true
+
+          # Install required components
+          sudo apt-get install -y qemu-user-binfmt binfmt-support
+
+          # Ensure binfmt_misc is mounted
+          sudo mount -t binfmt_misc none /proc/sys/fs/binfmt_misc || true
+
+          # Restart binfmt service (critical step)
+          sudo systemctl restart systemd-binfmt || true
+
+          # Explicitly register QEMU handlers (this is what you're missing)
+          for arch in aarch64 arm; do
+            sudo update-binfmts --enable qemu-$arch || true
+          done
+
+          # Verify registration
+          ls /proc/sys/fs/binfmt_misc || true
+          cat /proc/sys/fs/binfmt_misc/qemu-aarch64 || true
 
       - name: Build Kiosk x86_64
         run: env CI=true sudo ./build.sh <<< "1"
@@ -51,12 +66,27 @@ jobs:
           fetch-depth: 0 # Fetch all history for all branches and tags
           submodules: "recursive" # Fetch submodules recursively
 
-      - name: Set up QEMU
+      - name: Set up QEMU (binfmt)
         run: |
           sudo apt-get update
-          sudo apt-get install -y qemu-user-static binfmt-support
-          sudo update-binfmts --enable qemu-arm || true
-          sudo update-binfmts --enable qemu-aarch64 || true
+
+          # Install required components
+          sudo apt-get install -y qemu-user-binfmt binfmt-support
+
+          # Ensure binfmt_misc is mounted
+          sudo mount -t binfmt_misc none /proc/sys/fs/binfmt_misc || true
+
+          # Restart binfmt service (critical step)
+          sudo systemctl restart systemd-binfmt || true
+
+          # Explicitly register QEMU handlers (this is what you're missing)
+          for arch in aarch64 arm; do
+            sudo update-binfmts --enable qemu-$arch || true
+          done
+
+          # Verify registration
+          ls /proc/sys/fs/binfmt_misc || true
+          cat /proc/sys/fs/binfmt_misc/qemu-aarch64 || true
 
       - name: Build Kiosk RPI
         run: env CI=true sudo ./build.sh <<< "5"
