@@ -26,7 +26,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y qemu-user-binfmt
-          sudo mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc || true
+          sudo ls /proc/sys/fs/binfmt_misc/
+          exit 1
 
       - name: Build Kiosk x86_64
         run: env CI=true sudo ./build.sh <<< "1"
@@ -54,7 +55,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y qemu-user-binfmt
-          sudo mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc || true
+          sudo ls /proc/sys/fs/binfmt_misc/
+          exit 1
 
       - name: Build Kiosk RPI
         run: env CI=true sudo ./build.sh <<< "5"
