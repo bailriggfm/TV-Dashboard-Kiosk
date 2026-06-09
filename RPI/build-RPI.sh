@@ -75,8 +75,6 @@ overlayroot
 fonts-noto
 fonts-noto-core
 fonts-noto-extra
-fonts-noto-cjk
-fonts-noto-cjk-extra
 fonts-noto-color-emoji
 fonts-noto-ui-core
 fonts-noto-ui-extra
@@ -90,27 +88,7 @@ fonts-crosextra-carlito
 fonts-crosextra-caladea
 fonts-unifont
 fonts-symbola
-fonts-indic
-fonts-arabeyes
-fonts-culmus
-fonts-thai-tlwg
-fonts-khmeros
-fonts-lao
-fonts-sil-padauk
-fonts-sil-abyssinica
-fonts-sil-charis
-fonts-sil-doulos
-fonts-sil-gentiumplus
-fonts-paratype
-fonts-wqy-microhei
-fonts-wqy-zenhei
-fonts-ipaexfont
-fonts-ipafont
-fonts-takao
-fonts-nanum
-fonts-nanum-extra
 fonts-roboto
-fonts-smc
 EOF
 
 echo "🔧 Setting up config..."
