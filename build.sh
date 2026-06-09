@@ -84,9 +84,9 @@ if [[ "$BUILD_TYPE" == "x86_64" ]]; then
 elif [[ "$BUILD_TYPE" == "RPI" || "$BUILD_TYPE" == "RPI32" || "$BUILD_TYPE" == "RPI64"   ]]; then
   # Extract bit architecture from the configuration name
   if [[ "${BUILD_TYPE}" == *"RPI32"* ]]; then
-    RPI_ARCH="32"
+    export RPI_ARCH="32"
   elif [[ "${BUILD_TYPE}" == *"RPI64"* ]]; then
-    RPI_ARCH="64"
+    export RPI_ARCH="64"
   else
     # If not specified in name, ask the user
     read -p "Would you like to build a 32-bit or 64-bit RPI image? (32/64): " RPI_ARCH
