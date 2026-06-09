@@ -28,10 +28,13 @@ jobs:
           sudo apt-get install -y qemu-user-static openssl
 
       - name: Save Secureboot Secrets
+        env:
+          SECUREBOOT_MOK_KEY_VAL: ${{ secrets.SECUREBOOT_MOK_KEY_VAL }}
+          SECUREBOOT_MOK_CRT_VAL: ${{ secrets.SECUREBOOT_MOK_CRT_VAL }}
         run: |
           mkdir secrets
-          echo "$SECUREBOOT_MOK_KEY" > secrets/MOK.key
-          echo "$SECUREBOOT_MOK_CRT" > secrets/MOK.crt
+          echo "$SECUREBOOT_MOK_KEY_VAL" > secrets/MOK.key
+          echo "$SECUREBOOT_MOK_CRT_VAL" > secrets/MOK.crt
           openssl x509 -outform DER -in "secrets/MOK.crt" -out "secrets/MOK.cer"
           export SECUREBOOT_MOK_KEY="$(realpath secrets/MOK.key)"
           export SECUREBOOT_MOK_CRT="$(realpath secrets/MOK.crt)"
