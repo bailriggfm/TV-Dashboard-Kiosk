@@ -37,6 +37,12 @@ export RPI_DISABLE_FIRST_BOOT_USER_RENAME='1'
 export RPI_WPA_COUNTRY='GB'
 export RPI_ENABLE_SSH='0'
 
+# x86_64 Only
+export USE_SECUREBOOT="N"
+export SECUREBOOT_MOK_KEY=""
+export SECUREBOOT_MOK_CRT=""
+export SECUREBOOT_MOK_CER=""
+
 # Do not change these values unless you have updated any other relevant files.
 
 # Essential Directories
