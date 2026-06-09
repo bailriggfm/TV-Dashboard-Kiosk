@@ -137,6 +137,14 @@ inject_secureboot() {
   sbsign --key "$MOK_KEY" --cert "$MOK_CRT" --output "$TMPDIR/boot/vmlinuz-linux" "$TMPDIR/boot/vmlinuz-linux"
 
   mkdir -p "$TMPDIR/shim-signed"
+  shim_expected="26215953f7b01da06d0452b4287277ad5fc295a1aa4b79c1ff9d9a454fb029ae2a2090a64609d8ea42613bd5ae3e02ccebd1bea6e6912bbd5e0cd6de320723f2"
+  shim_actual=$(sha512sum "$SHIM_RPM" | awk '{print $1}')
+
+  if [[ "$shim_expected" != "$shim_actual" ]]; then
+      echo "Shim Binary has unexpected hash. Expected: $shim_expected, Actual: $shim_actual" >&2
+      exit 1
+  fi
+
   (cd "$TMPDIR/shim-signed" && rpm2cpio "$SHIM_RPM" | cpio -idmv >/dev/null 2>&1)
 
   SHIM_BASE=$(find "$TMPDIR/shim-signed" -type f -name shimx64.efi -o -name mmx64.efi -o -name BOOTX64.CSV | sed -n '1p' | xargs -I{} dirname {}) || true
