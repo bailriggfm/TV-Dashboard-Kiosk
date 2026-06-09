@@ -25,7 +25,23 @@ jobs:
       - name: Set up QEMU (binfmt)
         run: |
           sudo apt-get update
-          sudo apt-get install -y qemu-user-static
+          sudo apt-get install -y qemu-user-static openssl
+
+      - name: Save Secureboot Secrets
+        run: |
+          mkdir secrets
+          echo "$SECUREBOOT_MOK_KEY" > secrets/MOK.key
+          echo "$SECUREBOOT_MOK_CRT" > secrets/MOK.crt
+          openssl x509 -outform DER -in "secrets/MOK.crt" -out "secrets/MOK.cer"
+          export SECUREBOOT_MOK_KEY="$(realpath secrets/MOK.key)"
+          export SECUREBOOT_MOK_CRT="$(realpath secrets/MOK.crt)"
+          export SECUREBOOT_MOK_CER="$(realpath secrets/MOK.cer)"
+          sed -i \
+            -e 's|^export USE_SECUREBOOT="N"|export USE_SECUREBOOT="Y"|' \
+            -e "s|^export SECUREBOOT_MOK_KEY=.*|export SECUREBOOT_MOK_KEY=\"$SECUREBOOT_MOK_KEY\"|" \
+            -e "s|^export SECUREBOOT_MOK_CRT=.*|export SECUREBOOT_MOK_CRT=\"$SECUREBOOT_MOK_CRT\"|" \
+            -e "s|^export SECUREBOOT_MOK_CER=.*|export SECUREBOOT_MOK_CER=\"$SECUREBOOT_MOK_CER\"|" \
+            "./config.sh"
 
       - name: Build Kiosk x86_64
         run: env CI=true sudo ./build.sh <<< "1"
@@ -37,6 +53,11 @@ jobs:
           path: build/iso/*
           retention-days: 10
           compression-level: 0
+
+      - name: Clear Secureboot Secrets
+        if: always()
+        run: |
+          rm -r ./secrets
 
   build-kiosk-rpi:
     name: Build Kiosk ISO (RPI)
