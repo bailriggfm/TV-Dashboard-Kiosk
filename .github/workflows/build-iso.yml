@@ -25,8 +25,7 @@ jobs:
       - name: Set up QEMU (binfmt)
         run: |
           sudo apt-get update
-          sudo apt-get install -y qemu-user-binfmt
-          sudo docker run --privileged --rm tonistiigi/binfmt --install all
+          sudo apt-get install -y qemu-user-static
 
       - name: Build Kiosk x86_64
         run: env CI=true sudo ./build.sh <<< "1"
@@ -53,8 +52,7 @@ jobs:
       - name: Set up QEMU (binfmt)
         run: |
           sudo apt-get update
-          sudo apt-get install -y qemu-user-binfmt
-          sudo docker run --privileged --rm tonistiigi/binfmt --install all
+          sudo apt-get install -y qemu-user-static
 
       - name: Build Kiosk RPI
         run: env CI=true sudo ./build.sh <<< "2"
