@@ -60,6 +60,10 @@ You can generate a MOK key using the `x86_64/secureboot/inject-secureboot.sh` sc
 ./x86_64/secureboot/inject-secureboot.sh generate-mok ./output-dir 3650
 ```
 
+Secure boot uses the Fedora Signed Shim (`shim-x64-16.1-8.x86_64.rpm`). Once an image is built to boot it you will need to enroll the cert.
+
+See: https://www.ventoy.net/en/doc_secure.html and follow the steps to enroll a key.
+
 ### Firefox restrictions
 
 Firefox is configured on all users with a custom default firefox profile. This profile enables autoplay of media, disables first-run behaviours, disables all telemetry and sets the theme to a dark theme. This is useful for the kiosk that may not have user interaction but have autoplay of media. For safety we also specify the profile when we start firefox.
