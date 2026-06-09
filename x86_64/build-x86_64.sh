@@ -69,7 +69,7 @@ export ISO_NAME_PRE="SimpleLinuxKiosk-$(openssl rand -base64 4 | tr -dc 'a-zA-Z0
 
 if ! docker run "${DOCKER_RUN_ARGS[@]}" \
                 --rm \
-                -e ISO_NAME_PRE="$ISO_NAME_PRE"
+                -e ISO_NAME_PRE="$ISO_NAME_PRE" \
                 -v "$BUILD_TMP":/build \
                 -v "$ISO_DIR":/iso \
                 -v "$CACHE_DIR/pacman":/pacman \
