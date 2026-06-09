@@ -89,11 +89,11 @@ fi
 
 if [ "${USE_SECUREBOOT:-N}" != "N" ]; then
     echo "Injecting Secure Boot Shim into ISO..."
-    if ! "$BASE_DIR/x86_64/secureboot/inject-secureboot.sh" inject --in "$ISO_DIR/$ISO_NAME_PRE.iso" --out "$ISO_DIR/$ISO_NAME_PRE-secureboot.iso" --key "$SECUREBOOT_MOK_KEY" --cer "$SECUREBOOT_MOK_CER" --crt "$SECUREBOOT_MOK_CRT"; then
+    if ! "$BASE_DIR/x86_64/secureboot/inject-secureboot.sh" inject --in "$ISO_DIR/$ISO_NAME_PRE-$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y.%m.%d)-x86_64.iso" --out "$ISO_DIR/$ISO_NAME_PRE-$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y.%m.%d)-x86_64-secureboot.iso" --key "$SECUREBOOT_MOK_KEY" --cer "$SECUREBOOT_MOK_CER" --crt "$SECUREBOOT_MOK_CRT"; then
         echo "❌ Failed to inject Secure Boot Shim into ISO."
         exit 1
     fi
-    rm "$ISO_DIR/$ISO_NAME_PRE.iso"
+    rm "$ISO_DIR/$ISO_NAME_PRE-$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y.%m.%d)-x86_64.iso"
 fi
 
 echo "✅ Done! ISO built."
