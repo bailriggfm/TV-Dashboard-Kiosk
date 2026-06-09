@@ -20,14 +20,7 @@ sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY3_SERVICE"
 
 echo "🔧 Patching Stages..."
 patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/01-sys-tweaks-packages-patch.patch"
-if [ "${CI:-false}" != "false" ]; then
-  if [ "${RPI_ARCH}" == "32" ]; then
-    patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/patch-build-docker-ci.patch"
-  fi
-  if [ "${RPI_ARCH}" == "64" ]; then
-    patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/patch-build-docker-ci-arm64.patch"
-  fi
-fi
+patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/fix-dockerfile.patch"
 
 echo "🔧 Creating our own step..."
 mkdir -p "$RPIGEN/stage2/99-kiosk-config"

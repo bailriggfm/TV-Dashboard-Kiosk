@@ -53,8 +53,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y qemu-user-binfmt
-          sudo ls /usr/bin/qemu-*
-          exit 1
 
       - name: Build Kiosk RPI
         run: env CI=true sudo ./build.sh <<< "2"
