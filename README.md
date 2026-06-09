@@ -44,6 +44,22 @@ By default the localtime is set to Europe/London. For x86_64 This can be updated
 
 On the RPI build the PIs touchscreen is disabled to hide the mouse cursor when no mouse is connected. If you need the touchscreen feature please remove this service from `RPI/build-RPI.sh`
 
+### Secure Boot
+Secure boot can be added to the x86_64 images by enabling the feature in `config.sh` and filling out the values:
+
+```sh
+export USE_SECUREBOOT="Y"
+export SECUREBOOT_MOK_KEY="/path/to/key.key"
+export SECUREBOOT_MOK_CRT="/path/to/crt.crt"
+export SECUREBOOT_MOK_CER="/path/to/cer.cer"
+```
+
+You can generate a MOK key using the `x86_64/secureboot/inject-secureboot.sh` script
+
+```sh
+./x86_64/secureboot/inject-secureboot.sh generate-mok ./output-dir 3650
+```
+
 ### Firefox restrictions
 
 Firefox is configured on all users with a custom default firefox profile. This profile enables autoplay of media, disables first-run behaviours, disables all telemetry and sets the theme to a dark theme. This is useful for the kiosk that may not have user interaction but have autoplay of media. For safety we also specify the profile when we start firefox.
