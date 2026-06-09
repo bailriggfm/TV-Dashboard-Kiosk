@@ -25,7 +25,7 @@ jobs:
       - name: Set up QEMU (binfmt)
         run: |
           sudo apt-get update
-          sudo apt-get install -y qemu-user-static openssl
+          sudo apt-get install -y qemu-user-static
 
       - name: Save Secureboot Secrets
         env:
@@ -45,6 +45,11 @@ jobs:
             -e "s|^export SECUREBOOT_MOK_CRT=.*|export SECUREBOOT_MOK_CRT=\"$SECUREBOOT_MOK_CRT\"|" \
             -e "s|^export SECUREBOOT_MOK_CER=.*|export SECUREBOOT_MOK_CER=\"$SECUREBOOT_MOK_CER\"|" \
             "./config.sh"
+
+      - name: Install Secure Boot Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openssl xorriso sbsigntool rpm2cpio cpio mtools
 
       - name: Build Kiosk x86_64
         run: env CI=true sudo ./build.sh <<< "1"
