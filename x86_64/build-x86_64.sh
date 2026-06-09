@@ -74,7 +74,7 @@ if ! docker run "${DOCKER_RUN_ARGS[@]}" \
                 -v "$CACHE_DIR/pacman":/pacman \
                 -w /build archlinux:latest \
                 /bin/bash -c '
-                pacman -Sy --noconfirm archlinux-keyring archiso edk2-ovmf gnupg grub openssl || {
+                pacman -Sy --noconfirm archlinux-keyring archiso edk2-ovmf gnupg grub openssl libisoburn sbsigntools rpmextract cpio mtools || {
                     echo "❌ Failed to install required packages with pacman.";
                     exit 1;
                 }
