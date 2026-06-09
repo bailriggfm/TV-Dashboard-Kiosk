@@ -76,7 +76,7 @@ jobs:
           fetch-depth: 0 # Fetch all history for all branches and tags
           submodules: "recursive" # Fetch submodules recursively
 
-      - name: Set up QEMU
+      - name: Set up QEMU (binfmt)
         run: |
           sudo apt-get update
           sudo apt-get install -y qemu-user-static
@@ -104,7 +104,7 @@ jobs:
           fetch-depth: 0 # Fetch all history for all branches and tags
           submodules: "recursive" # Fetch submodules recursively
 
-      - name: Set up QEMU
+      - name: Set up QEMU (binfmt)
         run: |
           sudo apt-get update
           sudo apt-get install -y qemu-user-static
