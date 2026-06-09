@@ -20,7 +20,15 @@ sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY3_SERVICE"
 
 echo "🔧 Patching Stages..."
 patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/01-sys-tweaks-packages-patch.patch"
-patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/revert-to-qemu-user-static.patch"
+if [ "${CI:-false}" != "false" ]; then
+  if [ "${RPI_ARCH}" == "32" ]; then
+    patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/revert-to-qemu-user-static-armhf.patch"
+  fi
+  if [ "${RPI_ARCH}" == "64" ]; then
+    patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/revert-to-qemu-user-static-aarch64.patch"
+  fi
+fi
+
 
 echo "🔧 Creating our own step..."
 mkdir -p "$RPIGEN/stage2/99-kiosk-config"
