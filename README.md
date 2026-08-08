@@ -34,9 +34,9 @@ After building an x86_64 image you will need to remove the work directory `./bui
 
 ## Other Features
 
-On the x86_64 inage pressing CTRL + ALT + 2 (TTY2) will take you to a TUI allowing you reboot the computer into another boot option detected by UEFI firmware at boot. This can be disabled by removing the `override.conf` file in the `x86_64/airootfs/etc/systemd/system/getty@tty2.service.d` folder. On the RPI image this is configured to be raspi-config
+On the x86_64 inage pressing CTRL + ALT + 2 (TTY3) will take you to a TUI allowing you reboot the computer into another boot option detected by UEFI firmware at boot. This can be disabled by removing the `override.conf` file in the `x86_64/airootfs/etc/systemd/system/getty@tty3.service.d` folder. On the RPI image this is configured to be raspi-config
 
-Pressing CTRL + ALT + 3 (TTY3) will automatically log you into a tty as your defined user.
+Pressing CTRL + ALT + 4 (TTY4) will automatically log you into a tty as your defined user.
 
 The default sudo password for the user is liveuser. If you need to keep the system secure please change the password in the config.sh script
 

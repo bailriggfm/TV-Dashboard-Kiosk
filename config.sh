@@ -60,7 +60,8 @@ mkdir -p "$CACHE_DIR"
 
 # Config Files - Well the ones that need updating.
 export CAGE_SERVICE_PATH="$CONFIG_DIR/airootfs/etc/systemd/system/cage@.service"
-export GETTY_TTY3_SERVICE="$CONFIG_DIR/airootfs/etc/systemd/system/getty@tty3.service.d/autologin.conf"
+export GETTY_TTY2_SERVICE="$CONFIG_DIR/airootfs/etc/systemd/system/getty@tty2.service.d/autologin.conf"
+export GETTY_TTY4_SERVICE="$CONFIG_DIR/airootfs/etc/systemd/system/getty@tty4.service.d/autologin.conf"
 
 # x86_64 Only
 export SHADOW_FILE="$CONFIG_DIR/airootfs/etc/shadow"
