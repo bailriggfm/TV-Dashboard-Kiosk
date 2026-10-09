@@ -54,7 +54,7 @@ if ! docker run "${DOCKER_RUN_ARGS[@]}" \
                 cp /debian/*.iso ./debian-preseed-iso-generator/
                 apt-get update && apt-get install -y wget curl xorriso cpio gzip gnupg isolinux gnupg debian-archive-keyring
                 cp ./grub.cfg ./debian-preseed-iso-generator/
-                ls ./debian-preseed-iso-generator/
+                cp ./menu.cfg ./debian-preseed-iso-generator/
                 ./debian-preseed-iso-generator/debian-preseed-iso-generator.sh \
                   --output /iso_tmp \
                   -a amd64
