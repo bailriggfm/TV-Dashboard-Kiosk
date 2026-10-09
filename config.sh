@@ -13,9 +13,10 @@ declare -a FIREFOX_X86_64=('Firefox on x86_64' 'x86_64' 'firefox' 'ExecStart=/us
 declare -a CHROMIUM_RPI=('Chromium on RPI' 'RPI64' 'chromium' 'ExecStart=/usr/bin/cage -s -- /usr/bin/chromium --kiosk "https://google.com" --noerrdialogs --disable-infobars --incognito --start-fullscreen --autoplay-policy=no-user-gesture-required --disable-session-crashed-bubble --no-proxy-server --no-first-run')
 declare -a CHROMIUM_X86_64=('Chromium on x86_64' 'x86_64' 'chromium' 'ExecStart=/usr/bin/cage -s -- /usr/bin/chromium --kiosk "https://google.com" --noerrdialogs --disable-infobars --incognito --start-fullscreen --autoplay-policy=no-user-gesture-required --disable-session-crashed-bubble --no-proxy-server --no-first-run')
 declare -a FIREFOX_RPI=('Firefox on RPI' 'RPI64' 'firefox' 'ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://google.com"')
+declare -a FIREFOX_DEBIAN_INSTALLER=('Debian Test' 'debian-installer' 'firefox' 'ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://google.com"')
 
 # Main configuration array that includes all configurations
-declare -a CONFIG_MATRIX=(FIREFOX_X86_64 FIREFOX_RPI CHROMIUM_X86_64 CHROMIUM_RPI)
+declare -a CONFIG_MATRIX=(FIREFOX_X86_64 FIREFOX_RPI CHROMIUM_X86_64 CHROMIUM_RPI FIREFOX_DEBIAN_INSTALLER)
 
 # These variables will be set by the build script based on user selection
 export BUILD_TYPE=''

@@ -1,0 +1,35 @@
+diff --git a/debian-preseed-iso-generator.sh b/debian-preseed-iso-generator.sh
+index 43c16fa..242bdf9 100755
+--- a/debian-preseed-iso-generator.sh
++++ b/debian-preseed-iso-generator.sh
+@@ -322,6 +322,17 @@ for PRESEED in "${PRESEEDS[@]}"; do
+     spinner_stop
+     chmod --recursive u+w "${ISOFILEDIR}"
+
++    # Override the ISO's GRUB configuration if a custom one is provided.
++    CUSTOM_GRUB_CFG="../../grub.cfg"
++    if [[ -f "${CUSTOM_GRUB_CFG}" ]]; then
++        if [[ ! -f "${ISOFILEDIR}/boot/grub/grub.cfg" ]]; then
++            err "Custom GRUB config provided, but boot/grub/grub.cfg is missing from the ISO."
++        fi
++        cp -f "${CUSTOM_GRUB_CFG}" "${ISOFILEDIR}/boot/grub/grub.cfg" \
++            || err "Failed to install custom GRUB configuration."
++        log "Installed custom GRUB configuration from ${CUSTOM_GRUB_CFG}"
++    fi
++    
+     # Prepare preseed.cfg
+     PRESEED_TMPD=$(mktemp -d -t preseed-XXXXXX)
+     CURRENT_PRESEED_TMPD="${PRESEED_TMPD}"
+@@ -333,6 +344,12 @@ for PRESEED in "${PRESEEDS[@]}"; do
+         err "Preseed '${PRESEED}' has no preseed.cfg."
+     fi
+
++    # Copy any optional bundled files into the ISO so they are available as
++    # /cdrom/files/ during installation.
++    if [[ -d "files" ]]; then
++        cp -a "files" "${ISOFILEDIR}/"
++    fi
++
+     # Append preseed.cfg into initrd
+     spinner_start "Appending preseed to initrd..."
+     INITRD_ABS="${ISOFILEDIR}/${INITRD_DIR}/initrd"
