@@ -91,6 +91,7 @@ fonts-crosextra-caladea
 fonts-unifont
 fonts-symbola
 fonts-roboto
+firewalld
 EOF
 
 echo "🔧 Setting up config..."

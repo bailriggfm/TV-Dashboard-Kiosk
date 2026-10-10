@@ -26,6 +26,7 @@ fi
 # If our flag doesnt exist set it and reboot
 if [ ! -f "/readonly-done" ]; then
     touch /readonly-done
+    systemctl enable firewalld.service
     /usr/bin/raspi-config nonint do_overlayfs 0
     reboot
     exit 0
