@@ -71,4 +71,4 @@ if ! docker run "${DOCKER_RUN_ARGS[@]}" \
   exit 1
 fi
 
-exit 1
+exit 0
