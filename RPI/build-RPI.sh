@@ -16,9 +16,6 @@ sed -i "s|^ExecStart=.*|$CAGEEXECSTART_LINE|" "$CAGE_SERVICE_PATH"
 sed -i "s/^User=<user>/User=$USERNAME/" "$CAGE_SERVICE_PATH"
 sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY2_SERVICE"
 
-echo "🔧 Patching TTY4 for autologin..."
-sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY4_SERVICE"
-
 echo "🔧 Patching Stages..."
 patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/01-sys-tweaks-packages-patch.patch"
 if [ "${CI:-false}" == "false" ]; then
