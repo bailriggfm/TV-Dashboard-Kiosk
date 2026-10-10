@@ -18,15 +18,5 @@ done
 systemctl enable apt-daily.timer apt-daily-upgrade.timer
 systemctl enable firewalld.service
 
-zones=(internal trusted public home work)
-
-for zone in "${zones[@]}"; do
-    echo "Configuring zone: $zone"
-
-    firewall-cmd --permanent --zone="$zone" --set-target=DROP
-    # Remove SSH allowance
-    firewall-cmd --permanent --zone="$zone" --remove-service=ssh || true
-done
-
 # Cleanup ourselves
 rm /finish-install.sh
