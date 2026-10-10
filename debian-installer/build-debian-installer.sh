@@ -15,12 +15,12 @@ sed -i "s|^ExecStart=.*|$CAGEEXECSTART_LINE|" "$CAGE_SERVICE_PATH"
 sed -i "s/^User=<user>/User=$USERNAME/" "$CAGE_SERVICE_PATH"
 sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY2_SERVICE"
 
-echo "🔧 Patching TTY4 for autologin..."
-sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY4_SERVICE"
-
 sed -i "s|<user>|$USERNAME|g" "$CONFIG_DIR/preseeds/default/preseed.cfg" &&
   echo "✅ Updated $CONFIG_DIR/preseeds/default/preseed.cfg" || echo "❌ Failed to update $CONFIG_DIR/preseeds/default/preseed.cfg"
-sed -i "s|<password_hash>|$USERPASSWORDHASH|g" "$CONFIG_DIR/preseeds/default/preseed.cfg" &&
+# If you wish to bake the password for the user into the ISO, uncomment the following line, preseed.cfg, and ensure that the USERPASSWORD variable is set in config.sh. Note that this is not recommended for security reasons.
+#sed -i "s|<password_hash>|$USERPASSWORDHASH|g" "$CONFIG_DIR/preseeds/default/preseed.cfg" &&
+#  echo "✅ Updated $CONFIG_DIR/preseeds/default/preseed.cfg" || echo "❌ Failed to update $CONFIG_DIR/preseeds/default/preseed.cfg"
+sed -i "s|<CAGED_APP>|$CAGED_APP|g" "$CONFIG_DIR/preseeds/default/preseed.cfg" &&
   echo "✅ Updated $CONFIG_DIR/preseeds/default/preseed.cfg" || echo "❌ Failed to update $CONFIG_DIR/preseeds/default/preseed.cfg"
 
 mv "$CONFIG_DIR/airootfs" "$CONFIG_DIR/debian-preseed-iso-generator/files"

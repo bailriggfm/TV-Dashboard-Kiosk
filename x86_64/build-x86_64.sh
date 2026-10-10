@@ -19,9 +19,6 @@ sed -i "s|^ExecStart=.*|$CAGEEXECSTART_LINE|" "$CAGE_SERVICE_PATH"
 sed -i "s/^User=<user>/User=$USERNAME/" "$CAGE_SERVICE_PATH"
 sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY2_SERVICE"
 
-echo "🔧 Patching TTY4 for autologin..."
-sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY4_SERVICE"
-
 echo "🔧 Setting up user $USERNAME..."
 if grep -q "^<user>:" "$SHADOW_FILE"; then
     sed -i "s|^<user>:[^:]*:|$USERNAME:$USERPASSWORDHASH:|" "$SHADOW_FILE" &&

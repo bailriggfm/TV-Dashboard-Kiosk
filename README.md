@@ -3,6 +3,9 @@
 A set of minimal scripts based off the default archiso and pi-gen scripts to setup a minimal environment and then launch a kiosk.
 By default this uses firefox but cage (our wayland environment) supports any application.
 
+> [!NOTE]
+> Refrences to the x86_64 build refer to the Arch Linux Live ISO build. Not the Debian Auto Installer.
+
 ## Building
 
 To build this image you are only required to install docker and git as the builds will be built within docker.
@@ -36,15 +39,14 @@ After building an x86_64 image you will need to remove the work directory `./bui
 
 On the x86_64 inage pressing CTRL + ALT + 2 (TTY3) will take you to a TUI allowing you reboot the computer into another boot option detected by UEFI firmware at boot. This can be disabled by removing the `override.conf` file in the `x86_64/airootfs/etc/systemd/system/getty@tty3.service.d` folder. On the RPI image this is configured to be raspi-config
 
-Pressing CTRL + ALT + 4 (TTY4) will automatically log you into a tty as your defined user.
-
 The default sudo password for the user is liveuser. If you need to keep the system secure please change the password in the config.sh script
 
-By default the localtime is set to Europe/London. For x86_64 This can be updated by updating the symlink for `airootfs/etc/localtime`
+By default the localtime is set to Europe/London and the keyboard layout to gb. For x86_64 This can be updated by updating the symlink for `airootfs/etc/localtime`
 
 On the RPI build the PIs touchscreen is disabled to hide the mouse cursor when no mouse is connected. If you need the touchscreen feature please remove this service from `RPI/build-RPI.sh`
 
 ### Secure Boot
+
 Secure boot can be added to the x86_64 images by enabling the feature in `config.sh` and filling out the values:
 
 ```sh
@@ -88,5 +90,14 @@ On the x86_64 images it is not possible to disable this functionality due to the
 
 Because x86_64 images are loaded into memory before booting them this does allow the boot medium to be removed, however the system will not be able to reboot into the image due to a lack of boot media. This does not apply to the RPI images, boot media must remain within the device while the os is booted.
 
-> [!NOTE]
-> Theoretically x86_64 images could have persistance enabled on them with the help of overlayfs, similarly to how the RPI is made readonly, where data could be written to a persistance partition outside of the image however this is untested.
+## Permanent Debian Installation (non-readonly)
+
+With the latest version of this project you can now create an automatic x86_64 debian installer ISO which will install and configure a kiosk on a permanent install. This allows you to create a more maintenance free kiosk where user interaction may not occur.
+
+This version once installed automatically applies security updates (and reboots 2am London time) and has just enough OS to run the kiosk. It uses the same base (restricted browsers, strict firewall, unmuted & working audio, preconfigured user) while allowing you to run this on a more permananent basis.
+
+Because of the way images are build please make sure to define the CAGED_APP, exec line and username in the config.
+
+### Future potential
+
+By making use of Debian's preseed.cfg a fully ready and custom OS is deployed which could be modified to work with dual boot scenarios or when you may want more info to persist.
