@@ -18,6 +18,11 @@ sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY2_SERVICE"
 echo "🔧 Patching TTY4 for autologin..."
 sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY4_SERVICE"
 
+sed -i "s|<user>|$USERNAME|g" "$CONFIG_DIR/preseeds/default/preseed.cfg" &&
+  echo "✅ Updated $CONFIG_DIR/preseeds/default/preseed.cfg" || echo "❌ Failed to update $CONFIG_DIR/preseeds/default/preseed.cfg"
+sed -i "s|<password_hash>|$USERPASSWORDHASH|g" "$CONFIG_DIR/preseeds/default/preseed.cfg" &&
+  echo "✅ Updated $CONFIG_DIR/preseeds/default/preseed.cfg" || echo "❌ Failed to update $CONFIG_DIR/preseeds/default/preseed.cfg"
+
 mv "$CONFIG_DIR/airootfs" "$CONFIG_DIR/debian-preseed-iso-generator/files"
 
 rm -r "$CONFIG_DIR/debian-preseed-iso-generator/preseeds"
