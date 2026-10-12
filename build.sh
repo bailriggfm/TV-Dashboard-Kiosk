@@ -113,6 +113,11 @@ elif [[ "$BUILD_TYPE" == "RPI" || "$BUILD_TYPE" == "RPI32" || "$BUILD_TYPE" == "
       exit 1
       ;;
   esac
+elif [[ "$BUILD_TYPE" == "debian-installer" ]]; then
+  echo "Building Debian Installer image with $CAGED_APP..."
+  cp -r "$BASE_DIR/debian-installer/." "$CONFIG_DIR"
+  cp -r "$BASE_DIR/airootfs-shared/." "$CONFIG_DIR/airootfs/"
+  "$BASE_DIR/debian-installer/build-debian-installer.sh"
 else
   echo "Unknown build type: $BUILD_TYPE. Exiting."
   exit 1

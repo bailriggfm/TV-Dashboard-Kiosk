@@ -14,9 +14,7 @@ export RPIGEN_CONFIG="$RPIGEN/config"
 echo "🔧 Patching Cage Service..."
 sed -i "s|^ExecStart=.*|$CAGEEXECSTART_LINE|" "$CAGE_SERVICE_PATH"
 sed -i "s/^User=<user>/User=$USERNAME/" "$CAGE_SERVICE_PATH"
-
-echo "🔧 Patching TTY3 for autologin..."
-sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY3_SERVICE"
+sed -i "s/--autologin <user>/--autologin $USERNAME/" "$GETTY_TTY2_SERVICE"
 
 echo "🔧 Patching Stages..."
 patch -d "$RPIGEN" -p1 < "$CONFIG_DIR/files/01-sys-tweaks-packages-patch.patch"
@@ -90,6 +88,7 @@ fonts-crosextra-caladea
 fonts-unifont
 fonts-symbola
 fonts-roboto
+firewalld
 EOF
 
 echo "🔧 Setting up config..."

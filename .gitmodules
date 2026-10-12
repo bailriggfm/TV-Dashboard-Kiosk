@@ -1,3 +1,6 @@
 [submodule "RPI/pi-gen"]
 	path = RPI/pi-gen
 	url = https://github.com/RPi-Distro/pi-gen.git
+[submodule "debian-installer/debian-preseed-iso-generator"]
+	path = debian-installer/debian-preseed-iso-generator
+	url = https://github.com/bergmann-max/debian-preseed-iso-generator.git

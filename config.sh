@@ -4,6 +4,7 @@
 
 # Username & Password for the live user
 export USERNAME='live'
+# Not used in the Debian Installer build. If you wish to bake the password for the user into the ISO, uncomment the relevant line in build-debian-installer.sh and ensure that this variable is set. Note that this is not recommended for security reasons.
 export USERPASSWORD='liveuser'
 
 # Configuration matrix for applications using arrays
@@ -16,8 +17,10 @@ declare -a CHROMIUM_RPI_OFFICE=('Chromium on RPI - Office' 'RPI64' 'chromium' 'E
 declare -a CHROMIUM_RPI_STUDIOA=('Chromium on RPI - Studio A' 'RPI64' 'chromium' 'ExecStart=/usr/bin/cage -s -- /usr/bin/chromium --kiosk "https://screen.bailriggfm.co.uk/view/studio-a" --noerrdialogs --disable-infobars --incognito --start-fullscreen --autoplay-policy=no-user-gesture-required --disable-session-crashed-bubble --no-proxy-server --no-first-run')
 declare -a CHROMIUM_RPI_PLAYER=('Chromium on RPI - Player' 'RPI64' 'chromium' 'ExecStart=/usr/bin/cage -s -- /usr/bin/chromium --kiosk "https://screen.bailriggfm.co.uk/view/player" --noerrdialogs --disable-infobars --incognito --start-fullscreen --autoplay-policy=no-user-gesture-required --disable-session-crashed-bubble --no-proxy-server --no-first-run')
 
+declare -a FIREFOX_DEBIAN_INSTALLER=('Firefox on Debian Permanent Install' 'debian-installer' 'firefox-esr' 'ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://screen.bailriggfm.co.uk/view/office?pass=primary"')
+
 # Main configuration array that includes all configurations
-declare -a CONFIG_MATRIX=(FIREFOX_X86_64_OFFICE FIREFOX_X86_64_STUDIOA FIREFOX_X86_64_PLAYER CHROMIUM_RPI_OFFICE CHROMIUM_RPI_STUDIOA CHROMIUM_RPI_PLAYER)
+declare -a CONFIG_MATRIX=(FIREFOX_X86_64_OFFICE FIREFOX_X86_64_STUDIOA FIREFOX_X86_64_PLAYER CHROMIUM_RPI_OFFICE CHROMIUM_RPI_STUDIOA CHROMIUM_RPI_PLAYER FIREFOX_DEBIAN_INSTALLER)
 
 # These variables will be set by the build script based on user selection
 export BUILD_TYPE=''
@@ -39,7 +42,9 @@ export RPI_DISABLE_FIRST_BOOT_USER_RENAME='1'
 export RPI_WPA_COUNTRY='GB'
 export RPI_ENABLE_SSH='0'
 
-# x86_64 Only
+# x86_64 Only (Not Debian Installer)
+export PACMAN_MIRROR=""
+export ENABLE_PACMAN_CACHE="Y"
 export USE_SECUREBOOT="N"
 export SECUREBOOT_MOK_KEY=""
 export SECUREBOOT_MOK_CRT=""
@@ -60,7 +65,7 @@ mkdir -p "$CACHE_DIR"
 
 # Config Files - Well the ones that need updating.
 export CAGE_SERVICE_PATH="$CONFIG_DIR/airootfs/etc/systemd/system/cage@.service"
-export GETTY_TTY3_SERVICE="$CONFIG_DIR/airootfs/etc/systemd/system/getty@tty3.service.d/autologin.conf"
+export GETTY_TTY2_SERVICE="$CONFIG_DIR/airootfs/etc/systemd/system/getty@tty2.service.d/autologin.conf"
 
 # x86_64 Only
 export SHADOW_FILE="$CONFIG_DIR/airootfs/etc/shadow"

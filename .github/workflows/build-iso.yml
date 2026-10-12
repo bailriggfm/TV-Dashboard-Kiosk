@@ -148,3 +148,30 @@ jobs:
           path: build/iso/*
           retention-days: 10
           compression-level: 0
+
+  build-kiosk-debian-installer:
+    name: Build Kiosk ISO (Debian Installer)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 # Fetch all history for all branches and tags
+          submodules: "recursive" # Fetch submodules recursively
+
+      - name: Set up QEMU (binfmt)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static
+
+      - name: Build Kiosk Debian Installer
+        run: env CI=true sudo ./build.sh <<< "5"
+
+      - name: Upload Debian Installer ISO
+        uses: actions/upload-artifact@v7
+        with:
+          name: Built-ISO-Debian-Installer
+          path: build/iso/*
+          retention-days: 10
+          compression-level: 0

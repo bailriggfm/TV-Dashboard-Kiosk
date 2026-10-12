@@ -20,7 +20,7 @@ Wants=dbus.socket systemd-logind.service
 After=dbus.socket systemd-logind.service
 # Replace any (a)getty that may have spawned, since we log in
 # automatically.
-Conflicts=getty@%i.service
+#Conflicts=getty@%i.service
 After=getty@%i.service
 
 [Service]
@@ -33,7 +33,9 @@ Environment="XKB_DEFAULT_OPTIONS="
 Environment="MOZ_ENABLE_WAYLAND=1"
 Environment="WLR_DRM_NO_ATOMIC=1"
 Environment="LIBSEAT_BACKEND=logind"
+ExecStartPre=/bin/sh -c 'until ping -c1 -W2 1.1.1.1 >/dev/null 2>&1; do sleep 2; done'
 ExecStart=/usr/bin/cage -s -- /usr/bin/firefox --kiosk --no-remote --start-fullscreen --no-proxy-server "https://google.com"
+ExecStartPost=+sh -c "tty_name='%i'; exec chvt $${tty_name#tty}"
 Restart=always
 User=<user>
 # Log this user with utmp, letting it show up with commands 'w' and
